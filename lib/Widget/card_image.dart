@@ -24,6 +24,7 @@ class _CardImage extends State<CardImage>{
   Widget build(BuildContext context) {
     // TODO: implement build
    return Container(
+
         child: GestureDetector(
           //MÉTODO ON TAP
           onTap: widget.onTap,

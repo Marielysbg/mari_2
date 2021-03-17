@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'brainstate_trips.dart';
+import 'package:tesis_brainstate/User/ui/screens/Login_Screen.dart';
+import 'package:tesis_brainstate/brainstate_trips_psico.dart';
+
 void main() {
   runApp(MyApp());
 }
+
+//PENDIENTE: TRAER DATA
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -16,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:  home_trips()//
+      home:  Login_Screen()
       // MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
