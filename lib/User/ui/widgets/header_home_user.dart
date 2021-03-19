@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:tesis_brainstate/Widget/gradient_back.dart';
 
 class headerHomeUser extends StatelessWidget{
+
+  String text1;
+  String text2;
+  headerHomeUser(this.text1, this.text2);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -27,7 +32,7 @@ class headerHomeUser extends StatelessWidget{
              left: 30.0
           ),
           child: Text(
-            '¡RESPIRA!',
+            text1,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 28.0,
@@ -41,7 +46,7 @@ class headerHomeUser extends StatelessWidget{
               left: 30.0
           ),
           child: Text(
-            'Todo estará bien',
+            text2,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 20.0,

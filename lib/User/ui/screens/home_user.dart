@@ -46,7 +46,7 @@ class home_user extends StatelessWidget{
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          headerHomeUser(),
+          headerHomeUser('¡RESPIRA!', 'Todo estará bien'),
           emoji_feedback(),
           text,
           SizedBox(

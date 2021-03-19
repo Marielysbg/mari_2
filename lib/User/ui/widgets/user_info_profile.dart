@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tesis_brainstate/User/model/User.dart';
 
 class userInfoProfile extends StatelessWidget{
 
+  User user = new User();
+  userInfoProfile(this.user);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
     final name = Container(
       child: Text(
-        "Eduardo Lopez",
+        user.name,
         style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -23,7 +27,7 @@ class userInfoProfile extends StatelessWidget{
         top: 5.0
       ),
       child: Text(
-        "eduardojls224@gmail.com",
+        user.email,
         style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -37,7 +41,7 @@ class userInfoProfile extends StatelessWidget{
           top: 5.0
       ),
       child: Text(
-        "0412-3408493",
+        user.telf,
         style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -60,7 +64,6 @@ class userInfoProfile extends StatelessWidget{
         ],
       ),
     );
-
 
     final photo = Container(
       height: 120.0,
