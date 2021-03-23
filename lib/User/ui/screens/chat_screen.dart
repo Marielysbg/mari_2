@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
-
-
-
-import 'models/chatMessageModel.dart';
+import '../../../models/chatMessageModel.dart';
 
 List<ChatMessage> messages=  <ChatMessage>[];
 

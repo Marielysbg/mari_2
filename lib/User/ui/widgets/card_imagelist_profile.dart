@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tesis_brainstate/Widget/card_image.dart';
 import 'package:tesis_brainstate/User/ui/screens/screen_respira.dart';
+import 'package:tesis_brainstate/User/ui/screens/Diary_screen.dart';
 
 class cardImageListProfile extends StatelessWidget{
   @override
@@ -25,7 +26,7 @@ class cardImageListProfile extends StatelessWidget{
                   text: 'Diario personal',
                   onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => screen_respira()
+                        builder: (context) => Diary_screen()
                     ));
                   },
                 ),

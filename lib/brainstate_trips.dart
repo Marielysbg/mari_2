@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'User/ui/screens/home_user.dart';
-import 'chat_screen.dart';
+import 'User/ui/screens/chat_screen.dart';
 import 'User/ui/screens/profile_screen.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 
