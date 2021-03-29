@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tesis_brainstate/Widget/card_image.dart';
 import 'package:tesis_brainstate/User/ui/screens/screen_respira.dart';
-import 'package:tesis_brainstate/User/ui/screens/Diary_screen.dart';
+import 'package:tesis_brainstate/User/ui/screens/NotesScreen.dart';
+import 'package:tesis_brainstate/User/model/User.dart';
 
 class cardImageListProfile extends StatelessWidget{
+
+  User user = new User();
+  cardImageListProfile(this.user);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -25,8 +30,9 @@ class cardImageListProfile extends StatelessWidget{
                   width: 160.0,
                   text: 'Diario personal',
                   onTap: (){
+
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Diary_screen()
+                        builder: (context) => NotesScreen(this.user)
                     ));
                   },
                 ),
