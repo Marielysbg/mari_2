@@ -98,6 +98,7 @@ class _sign_in extends State<sign_in>{
             borderRadius: BorderRadius.circular(18.0)
         ),
         onPressed: () async{
+          buildShowDialog(context);
           handleError(correo, contra);
         },
       ),
@@ -124,6 +125,17 @@ class _sign_in extends State<sign_in>{
         ),
       )
     );
+  }
+
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
   }
 
   handleError(String correo, String contra) async {

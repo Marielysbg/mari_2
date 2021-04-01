@@ -3,11 +3,15 @@ import 'package:tesis_brainstate/Widget/card_image.dart';
 import 'package:tesis_brainstate/User/ui/screens/screen_respira.dart';
 import 'package:tesis_brainstate/User/ui/screens/NotesScreen.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
+import 'package:tesis_brainstate/User/ui/screens/soli_psico.dart';
+import 'package:tesis_brainstate/User/model/User.dart';
 
 class cardImageListProfile extends StatelessWidget{
 
   User user = new User();
-  cardImageListProfile(this.user);
+  cardImageListProfile({Key key, @required this.user});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +67,7 @@ class cardImageListProfile extends StatelessWidget{
                   text: 'Mi psicologo',
                   onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => screen_respira()
+                        builder: (context) => soli_psico(user)
                     ));
                   },
                 ),

@@ -53,7 +53,7 @@ class userInfoProfile extends StatelessWidget{
     final user_info = Container(
       margin: EdgeInsets.only(
         left: 25.0,
-        top: 25.0
+        top: 20.0
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,22 +65,25 @@ class userInfoProfile extends StatelessWidget{
       ),
     );
 
-    final photo = Container(
-      height: 120.0,
-      width: 120.0,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              //image: AssetImage(user.photoURL)
-              image: NetworkImage("https://images-na.ssl-images-amazon.com/images/I/519-y7vsUrL._AC_.jpg"),
-          )
+    final photo =   CircleAvatar(
+      radius: 65.0,
+      child: ClipOval(
+        child: SizedBox(
+          width: 120.0,
+          height: 120.0,
+          child:
+          Image.network(
+           user.foto,
+            fit: BoxFit.cover,
+          ),
+
+        ),
       ),
     );
 
     return Container(
       margin: EdgeInsets.only(
-        top: 90.0,
+        top: 70.0,
         left: 20.0
       ),
       child: Row(

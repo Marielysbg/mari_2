@@ -51,14 +51,18 @@ class _CardImage extends State<CardImage>{
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  child: Text(
-                    //TEXTO PRINCIPAL
-                    widget.text,
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      //fontWeight: FontWeight.bold
-                    ),
-                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        //TEXTO PRINCIPAL
+                        widget.text,
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          //fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  )
                 )
               ],
             ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'brainstate_trips.dart';
 import 'package:tesis_brainstate/User/ui/screens/Login_Screen.dart';
-import 'package:tesis_brainstate/brainstate_trips_psico.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tesis_brainstate/Psico/edit_profile_psico.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,6 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate
+      ],
+      supportedLocales: [
+        const Locale('es')
+      ],
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

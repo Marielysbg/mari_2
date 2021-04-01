@@ -16,6 +16,39 @@ class headerprofile extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
 
+    void _showAlertDialog() {
+      showDialog(
+          context: context,
+          builder: (buildcontext) {
+            return AlertDialog(
+              title: Text("¿Desea salir de la aplicación?"),
+              content: Text("Presione cancelar para volver"),
+              actions: <Widget>[
+                    FlatButton(
+                      child:
+                      Text("Cancelar",
+                        style: TextStyle(
+                            color: Colors.blue
+                        ),
+                      ),
+                      onPressed: (){ Navigator.of(context).pop(); },
+                    ),
+                FlatButton(
+                  child:
+                  Text("Salir",
+                    style: TextStyle(
+                        color: Colors.blue
+                    ),
+                  ),
+                  onPressed: (){ auth.signOut().whenComplete(() =>  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => Login_Screen()))); },
+                ),
+              ],
+            );
+          }
+      );
+    }
+
     final text = Container(
       margin: EdgeInsets.only(
           top: 30.0,
@@ -39,14 +72,10 @@ class headerprofile extends StatelessWidget{
         icon: Icon(Icons.exit_to_app),
         color: Colors.white,
         onPressed: (){
-          auth.signOut().whenComplete(() =>  Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => Login_Screen()
-          ))
-          );
+          _showAlertDialog();
         },
       )
     );
-
 
     return Container(
       child: Stack(
@@ -59,5 +88,6 @@ class headerprofile extends StatelessWidget{
       ),
     );
   }
+
 
 }

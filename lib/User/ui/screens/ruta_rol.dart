@@ -35,10 +35,16 @@ class ruta_rol extends StatelessWidget{
     userr.name = snapshot.data['nombre'];
     userr.email = snapshot.data['correo'];
     userr.telf = snapshot.data['telf'];
+    userr.foto = snapshot.data['foto'];
+    userr.uid = snapshot.data['uid'];
 
     if(snapshot.data['rol'] == "Psicologo"){
+      userr.des = snapshot.data['descripcion'];
+      userr.dir = snapshot.data['direccion'];
       return brainstate_trips_psico(user, userr);
     } else{
+      userr.soli = snapshot.data['Solicitud enviada'];
+      userr.aceptado = snapshot.data['Aceptado'];
       return home_trips(userr);
     }
   }

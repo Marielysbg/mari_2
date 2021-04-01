@@ -14,8 +14,7 @@ class edit_psico extends StatelessWidget{
         child: RaisedButton(
           child: Text('Salir'),
           onPressed:() async{
-            auth.signOut().whenComplete(() =>  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => Login_Screen())));
+            auth.signOut().whenComplete(() =>  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Login_Screen())));
           },
         ),
       ),

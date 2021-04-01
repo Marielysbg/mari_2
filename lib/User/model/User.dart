@@ -10,6 +10,22 @@ class User with ChangeNotifier{
   String sexo;
   String contra;
   String foto;
+  List solicitud;
+  String aceptado;
+  String idA;
+  String nombreA;
+  String fotoA;
+  String correoA;
+  int index;
+  String soli;
+  String telfA;
+  String fecha;
+  String Temergencia;
+  bool verificado = false;
+  String s = null;
+  String cuadroc;
+  String dir;
+  String des;
 
   User({
     Key key,
@@ -20,7 +36,23 @@ class User with ChangeNotifier{
     this.rol,
     this.sexo,
     this.contra,
-    this.foto
+    this.foto,
+    this.solicitud,
+    this.aceptado,
+    this.idA,
+    this.nombreA,
+    this.fotoA,
+    this.correoA,
+    this.index,
+    this.soli,
+    this.telfA,
+    this.fecha,
+    this.Temergencia,
+    this.verificado,
+    this.s,
+    this.cuadroc,
+    this.des,
+    this.dir
   });
 
   Map<String, dynamic> toJsonPaciente() => {
@@ -30,7 +62,10 @@ class User with ChangeNotifier{
     'sexo': sexo,
     'telf': telf,
     'rol': rol,
-    'foto': foto
+    'foto': foto,
+    'Solicitud enviada': s,
+    'aceptado': 'null',
+    'fecha nacimiento': fecha
   };
 
   Map<String, dynamic> toJsonPsico() => {
@@ -41,6 +76,7 @@ class User with ChangeNotifier{
     'telf': telf,
     'rol': rol,
     'foto': foto,
-    'verificado': false
+    'verificado': verificado,
+    'fecha nacimiento': fecha
   };
 }

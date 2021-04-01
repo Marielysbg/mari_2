@@ -6,10 +6,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class home_psico extends StatelessWidget{
 
+  User user = new User();
+  FirebaseUser userf;
+  home_psico(this.user, this.userf);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
 
+    Stream<DocumentSnapshot> courseDocStream = Firestore.instance.collection('PSICOLOGOS').document(userf.uid).snapshots();
 
     final text = Container(
       margin: EdgeInsets.only(
@@ -27,28 +32,69 @@ class home_psico extends StatelessWidget{
       ),
     );
 
-    final data =  StreamBuilder(
-        stream: Firestore.instance.collection('PACIENTES').snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-          if(snapshot.hasData && snapshot.data != null){
-            //final docs = snapshot.data.docs;
-            return ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (BuildContext context, int index){
-                  var docs = snapshot.data.documents[index].data;
-                  //final user = docs[index].data();
-                  return ListTile(
-                    title: Text(docs['nombre']),
-                    subtitle: Text(docs['correo']),
-                  );
-                }
-            );
-          }
-          return Container();
-        }
+    final data = StreamBuilder<DocumentSnapshot>(
+    stream: courseDocStream,
+    builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+      if (snapshot.data != null) {
+        print(snapshot.data);
+        var courseDocument = snapshot.data.data;
+        // get sections from the document
+        var sections = courseDocument['Aceptados'];
+        // build list using names from sections
+        return Container(
+            child: GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemCount: sections != null ? sections.length : 0,
+            itemBuilder: (_, int index) {
+              return Container(
+                child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    margin: EdgeInsets.all(10),
+                    elevation: 5,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Column(
+                        children: <Widget>[
+                          FadeInImage(
+                            // En esta propiedad colocamos la imagen a descargar
+                            image: NetworkImage(
+                              sections[index]['fotoU'],
+                            ),
+                            placeholder: AssetImage('assets/img/loading.gif'),
+                            fit: BoxFit.cover,
+                            // En esta propiedad colocamos el alto de nuestra imagen
+                           height: 120.0,
+                           // width: 300.0,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Text(
+                                  sections[index]['nombreU'],
+                                ),
+                                Text(
+                                  sections[index]['correoU'],
+                                )
+                              ],
+                            )
+                          )
+                        ],
+                      ),
+                    )
+                ),
+              );
+            }
+        )
+        );
+      } else{
+        return Container();
+      }
+    }
     );
+
 
     return Container(
       child: ListView(

@@ -4,6 +4,7 @@ import 'package:tesis_brainstate/Psico/edit_psico.dart';
 import 'package:tesis_brainstate/Psico/home_psico.dart';
 import 'package:tesis_brainstate/Psico/profile_psico.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
+import 'package:tesis_brainstate/Psico/notificaciones_screen.dart';
 
 
 class brainstate_trips_psico extends StatefulWidget{
@@ -37,9 +38,10 @@ class _brainstate_trips_psico extends State<brainstate_trips_psico>{
     // TODO: implement build
 
     final List widgetsChildren = [
-      home_psico(),
+      home_psico(widget.userr, widget.user),
       edit_psico(),
-      profile_psico()
+      notificaciones_screen(widget.userr, widget.user),
+      profile_psico(widget.userr)
     ];
 
     return Scaffold(
@@ -47,10 +49,11 @@ class _brainstate_trips_psico extends State<brainstate_trips_psico>{
         bottomNavigationBar: (Theme(
             data: Theme.of(context).copyWith(
                 canvasColor: Colors.white,
-                primaryColor: Colors.indigo
             ),
             child:
             BottomNavigationBar(
+              selectedItemColor: Colors.indigo,
+              unselectedItemColor: Colors.black26,
               onTap: onTapTapped,
               currentIndex: indextap,
               //selectedFontSize: 0,
@@ -63,6 +66,10 @@ class _brainstate_trips_psico extends State<brainstate_trips_psico>{
                     icon: Icon(Icons.show_chart),
                     title: Text("Estadísticas")
                 ),
+               BottomNavigationBarItem(
+                  icon: Icon(Icons.notifications),
+                  title: Text("Solicitudes")
+               ),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.person),
                     title: Text("Perfil")

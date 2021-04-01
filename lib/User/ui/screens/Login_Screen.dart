@@ -59,13 +59,13 @@ class _Login_Screen extends State<Login_Screen>{
 
     final button = Container(
       margin: EdgeInsets.only(
-        top: 100.0
+        top: 80.0
       ),
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            width: 180.0,
+            width: 300.0,
             height: 50.0,
             child: RaisedButton(
               child: Text('Iniciar sesión',
@@ -88,7 +88,10 @@ class _Login_Screen extends State<Login_Screen>{
             ),
           ),
           Container(
-            width: 180.0,
+            margin: EdgeInsets.only(
+                top: 20.0
+            ),
+            width: 300.0,
             height: 50.0,
             child: RaisedButton(
               child: Text('Registrar',
@@ -104,10 +107,7 @@ class _Login_Screen extends State<Login_Screen>{
                   side: BorderSide(color: Colors.indigo)
               ),
               onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Registro()),
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Registro()),);
               },
             ),
           )
