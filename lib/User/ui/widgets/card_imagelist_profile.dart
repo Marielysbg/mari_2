@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tesis_brainstate/Widget/card_image.dart';
 import 'package:tesis_brainstate/User/ui/screens/screen_respira.dart';
 import 'package:tesis_brainstate/User/ui/screens/NotesScreen.dart';
+import 'package:tesis_brainstate/User/ui/screens/screen_metas.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:tesis_brainstate/User/ui/screens/soli_psico.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
@@ -76,13 +77,13 @@ class cardImageListProfile extends StatelessWidget{
                         left: 10.0
                     ),
                   child: CardImage(
-                    linkImage: 'https://blush.design/api/download?shareUri=YNhzKS3Lh&w=800&h=800&fm=png',
+                    linkImage: 'https://blush.design/api/download?shareUri=HYzmr7wWS&w=800&h=800&fm=png',
                     height: 150.0,
                     width: 160.0,
-                    text: 'Rutinas',
+                    text: 'Metas',
                     onTap: (){
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => screen_respira()
+                          builder: (context) => screenMetas(user)
                       ));
                     },
                   ),
