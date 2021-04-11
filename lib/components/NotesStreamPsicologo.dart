@@ -5,11 +5,11 @@ import 'package:tesis_brainstate/models/Note.dart';
 import 'package:tesis_brainstate/User/ui/screens/NoteScreen.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 
-class NotesStream extends StatelessWidget {
+class NotesStreamPsicologo extends StatelessWidget {
   final Firestore _firestore;
   User user = new User();
 
-  NotesStream({firestore, this.user, idA}) : _firestore = firestore;
+  NotesStreamPsicologo({firestore, this.user}) : _firestore = firestore;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,9 @@ class NotesStream extends StatelessWidget {
         }
 
 
-        final notes = snapshot.data.documents.where((DocumentSnapshot document)=> document['user']['correo'] == this.user.email)
+        final notes = snapshot.data.documents
+            .where((DocumentSnapshot document)=> document['user']['correo'] == this.user.email)
+            .where((DocumentSnapshot document)=> document['user']['paciente'] == this.user.idA)
             .toList();
         //
         List<NoteCard> noteCards = [];

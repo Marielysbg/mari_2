@@ -5,6 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:tesis_brainstate/Psico/mensajes_p.dart';
 
+import 'package:tesis_brainstate/User/ui/widgets/patient_option_card.dart';
+
 
 class perfil_paciente_t extends StatelessWidget{
 
@@ -256,6 +258,7 @@ class perfil_paciente_t extends StatelessWidget{
                                 ],
                               ),
                               consejo,
+                              patient_option_card(user: user,)
                             ],
                           )
                       )

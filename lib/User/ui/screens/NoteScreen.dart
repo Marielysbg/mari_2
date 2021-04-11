@@ -92,7 +92,7 @@ class _NoteScreenState extends State<NoteScreen> {
               controller: controllerTitle,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
-                hintText: '¿De que quieres hablar hoy??',
+                hintText: 'Titulo',
               ),
               onChanged: (value) {
                 titleString = value;
@@ -109,7 +109,7 @@ class _NoteScreenState extends State<NoteScreen> {
                 controller: controllerNote,
                 maxLines: null,
                 expands: true,
-                decoration: InputDecoration(hintText: 'Cuentame'),
+                decoration: InputDecoration(hintText: 'Descripción'),
                 onChanged: (value) {
                   noteString = value;
                 },
