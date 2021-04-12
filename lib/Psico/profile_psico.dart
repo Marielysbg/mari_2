@@ -43,7 +43,7 @@ class profile_psico extends StatelessWidget{
     );
 
     final consejo =  Container(
-      padding: EdgeInsets.only(left: 17.0, right: 15.0, top: 30.0),
+      padding: EdgeInsets.only(left: 17.0, right: 15.0, top: 20.0),
       // margin: const EdgeInsets.symmetric(horizontal: 5.0),
       child: Row(
         children: <Widget>[
@@ -97,87 +97,171 @@ class profile_psico extends StatelessWidget{
     );
 
     final b1 = Container(
-      width: 350.0,
-      height: 60.0,
-      margin: EdgeInsets.only(
-          top: 30.0
-      ),
-      child: RaisedButton(
-          elevation: 3.0,
+      child: CircleAvatar(
+        backgroundColor: Color(0xFFC5CAE9),
+        radius: 30.0,
+        child: IconButton(
           onPressed: () => {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => List_pacientes(user)))
+            Navigator.push(context, MaterialPageRoute(builder: (context) => List_pacientes(user)))
           },
           // padding: const EdgeInsets.all(0.0),
-          color: Colors.white,
-          child: Container(
-            child:Row(
-              children: [
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Icon(Icons.list,
-                      size: 30.0,
-                      color: Colors.indigo,
-                    )
-                ),
-                Container(
-                    margin: const EdgeInsets.only( left: 10.0 ),
-                    child: Text(
-                      "Mis pacientes",
-                      style: TextStyle( fontSize: 17.0,
-                        color: Colors.black54,
-                      ),
-                    )
-                )
-              ],
-            ),
-          ),
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(5.0),
-              side: BorderSide(color: Colors.indigo)
-          )
-      ),
+          color: Color(0xFFFF5252),
+          icon: Icon(Icons.people,
+              color: Colors.black),
+        ),
+      )
     );
 
     final b2 = Container(
-      width: 350.0,
-      height: 60.0,
-      margin: EdgeInsets.only(
-          top: 30.0
-      ),
-      child: RaisedButton(
-          elevation: 3.0,
+      //width: 350.0,
+      //height: 60.0,
+     // margin: EdgeInsets.only(
+      //    top: 30.0
+     // ),
+      child: CircleAvatar(
+          backgroundColor: Color(0xFFC5CAE9),
+          radius: 30.0,
+        child: IconButton(
           onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => consejos_screen(user)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => consejos_screen(user)));
           },
           // padding: const EdgeInsets.all(0.0),
           color: Colors.white,
-          child: Container(
-            child:Row(
-              children: [
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Icon(Icons.message,
-                      size: 30.0,
-                      color: Colors.indigo,
+          icon: Icon(Icons.message,
+            color: Colors.black,
+          ),
+
+        ),
+      )
+    );
+
+    final text = Container(
+      margin: EdgeInsets.only(
+        left: 20.0
+      ),
+      child: Text(
+        'Envía un mensaje general a tus pacientes',
+        style: TextStyle(
+          color: Color(0xFF212121),
+          fontWeight: FontWeight.bold
+        ),
+      ),
+    );
+
+    final des =  Container(
+        margin: EdgeInsets.only(
+            top: 20.0,
+            right: 20.0,
+          left: 20.0,
+          bottom: 20.0
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    border: Border.all(
+                        color: Colors.indigo
                     )
                 ),
-                Container(
-                    margin: const EdgeInsets.only( left: 10.0 ),
-                    child: Text(
-                      "Consejos",
-                      style: TextStyle( fontSize: 17.0,
-                          color: Colors.black54
+                child: Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Text(
+                          'Sobre mi',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0
+                          ),
+                        ),
                       ),
-                    )
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: 10.0
+                        ),
+                        child: Text(
+                          user.descripcion,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            fontSize: 17.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 )
-              ],
             ),
-          ),
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(5.0),
-              side: BorderSide(color: Colors.indigo)
-          )
-      ),
+            Container(
+              margin: EdgeInsets.only(
+                  top: 20.0
+              ),
+              child: Text(
+                'Datos personales',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                  top: 20.0,
+                  bottom: 20.0
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.add_location,
+                    size: 30.0,
+                    color: Colors.indigo,
+                  ),
+                  Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: 10.0
+                        ),
+                        child: Text(
+                         user.direccion,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 20,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                              fontSize: 17.0,
+                              color: Colors.black45
+                          ),
+                        ),
+                      )
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.phone,
+                  size: 30.0,
+                  color: Colors.indigo,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      left: 10.0
+                  ),
+                  child:Text(
+                    user.telf,
+                    style: TextStyle(
+                        fontSize: 17.0,
+                        color: Colors.black45
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        )
     );
 
     // TODO: implement build
@@ -187,20 +271,48 @@ class profile_psico extends StatelessWidget{
           FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
-                headerprofile(user),
+                headerprofile(user, 280.0),
                 Positioned(
                   top: 160.0,
                   right: 115.0,
                   child: edit,
-                )
+                ),
+                Container(
+                  width: 230.0,
+                  height: 100.0,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 15.0,
+                          offset: Offset(0.0, 0.75)
+                      )
+                    ],
+                  ),
+                  margin: EdgeInsets.only(
+                    top: 230.0,
+                    left: 80.0,
+                    bottom: 30.0
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      b1,
+                      b2
+                    ],
+                  ),
+                ),
               ],
             ),
+            text,
             consejo,
-            b1,
-            b2
+            des,
           ],
         ),
       )

@@ -20,8 +20,6 @@ class cuarto_registro extends StatelessWidget{
     'Depresión',
     'Pánico',
     'Estrés',
-    'Anorexia',
-    'Bulimia',
   ];
 
   List fotos = [
@@ -29,8 +27,6 @@ class cuarto_registro extends StatelessWidget{
     'https://media.istockphoto.com/vectors/sad-lonely-woman-in-depression-with-flying-hair-vector-id1166335598?k=6&m=1166335598&s=612x612&w=0&h=iXIrvfNzCQGE1amU4WmOw6-52n3AZ5NGG4qhG7MTZAI=',
     'https://media.istockphoto.com/vectors/woman-in-panic-vector-id1218027613?k=6&m=1218027613&s=612x612&w=0&h=d95oMTyr0KS7C3g2Yv7TKyjGrgdkSKVjCtj71glUFog=',
     'https://as2.ftcdn.net/jpg/01/59/70/65/500_F_159706532_oxAt3zvMtaJY6Zd3JOo1aaX8LHdYMo40.jpg',
-    'https://www.hoymagazine.es/wp-content/uploads/2020/05/anxiety-main-1576255998.jpg',
-    'https://media.istockphoto.com/vectors/woman-with-closed-eyes-is-eating-cake-vector-id1074161072?k=6&m=1074161072&s=612x612&w=0&h=ZgifZPAhgHpJOf0Nd52yC2xz0uM64afkAvkKtPlitaI=',
   ];
 
   @override
@@ -158,7 +154,7 @@ class cuarto_registro extends StatelessWidget{
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: 6,
+                  itemCount: 4,
                   itemBuilder: (_, index){
                     return Container(
                       child:  MaterialButton(
@@ -226,10 +222,6 @@ class cuarto_registro extends StatelessWidget{
                           preferencia = 'panico';
                         } else if(selectedIndex == 3){
                           preferencia = 'estres';
-                        } else if(selectedIndex == 4){
-                          preferencia = 'anorexia';
-                        } else {
-                          preferencia = 'bulimia';
                         }
                         user.cuadroc = preferencia;
                         buildShowDialog(context);

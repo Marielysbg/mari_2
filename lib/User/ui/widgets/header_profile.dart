@@ -9,7 +9,8 @@ import 'package:tesis_brainstate/User/ui/screens/Login_Screen.dart';
 class headerprofile extends StatelessWidget{
 
   User user = new User();
-  headerprofile(this.user);
+  double altura;
+  headerprofile(this.user, this.altura);
   final auth = FirebaseAuth.instance;
 
   @override
@@ -80,7 +81,7 @@ class headerprofile extends StatelessWidget{
     return Container(
       child: Stack(
         children: [
-          TopGradientBox(height: 250.0),
+          TopGradientBox(height: altura,),
          salir,
           text,
           userInfoProfile(user)

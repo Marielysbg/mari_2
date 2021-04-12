@@ -138,7 +138,8 @@ class profile_info_psico extends StatelessWidget{
                                       'solicitudU': user.uid,
                                       'nombreU': user.name,
                                       'correoU': user.email,
-                                      'fotoU': user.foto
+                                      'fotoU': user.foto,
+                                      'verificadoU': user.verificado
                                     }])
                                   });
                                   Navigator.pop(context);

@@ -3,9 +3,15 @@ import '../widgets/header_home_user.dart';
 import 'package:tesis_brainstate/Widget/emoji_feedback.dart';
 import 'package:tesis_brainstate/User/ui/widgets/card_image_list.dart';
 import 'package:tesis_brainstate/Widget/card_repository.dart';
+import 'package:tesis_brainstate/User/model/User.dart';
+import 'package:tesis_brainstate/User/ui/screens/repositorio_videos_home.dart';
 
 
 class home_user extends StatelessWidget{
+
+  User user = new User();
+  home_user(this.user);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -41,13 +47,15 @@ class home_user extends StatelessWidget{
       ),
     );
 
+
+
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           headerHomeUser('¡RESPIRA!', 'Todo estará bien'),
-          emoji_feedback(),
+          emoji_feedback(user),
           text,
           SizedBox(
             height: 120.0,
@@ -75,7 +83,9 @@ class home_user extends StatelessWidget{
                       title: 'Videos',
                       icon: Icon(Icons.video_library),
                       sub: 'Relajate con los videos que preparamos para ti',
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => repositorio_videos_home()));
+                    },
                   ),
                 ),
               ],

@@ -98,32 +98,47 @@ class _sign_in extends State<sign_in>{
             borderRadius: BorderRadius.circular(18.0)
         ),
         onPressed: () async{
-          buildShowDialog(context);
-          handleError(correo, contra);
+          FocusScope.of(context).requestFocus(new FocusNode());
+          if (correo == null || contra == null){
+            Fluttertoast.showToast(msg: 'No puede dejar los campos vacíos');
+          } else{
+            buildShowDialog(context);
+            handleError(correo, contra);
+          }
+
         },
       ),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Inicia sesión'),
-        backgroundColor: Colors.indigo,
-        toolbarHeight: 70.0,
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              img,
-              input_correo,
-              input_contra,
-              button
-            ],
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text('Inicia sesión'),
+            backgroundColor: Colors.indigo,
+            toolbarHeight: 70.0,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
           ),
-        ),
-      )
+          body: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  img,
+                  input_correo,
+                  input_contra,
+                  button
+                ],
+              ),
+            ),
+          )
+      ),
     );
   }
 
@@ -140,8 +155,7 @@ class _sign_in extends State<sign_in>{
 
   handleError(String correo, String contra) async {
     try {
-      user =
-      await auth.signInWithEmailAndPassword(email: correo, password: contra);
+      user = await auth.signInWithEmailAndPassword(email: correo, password: contra);
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => ruta_rol(user)));
     } catch (error) {
@@ -151,15 +165,14 @@ class _sign_in extends State<sign_in>{
       } else if (error.message ==
           'The password is invalid or the user does not have a password.') {
         Fluttertoast.showToast(msg: 'Contraseña incorrecta');
-      } else if (error.message ==
-          'A network error (such as timeout, interrupted connection or unreachable host) has occurred.') {
+      } else if (error.message == 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.') {
         Fluttertoast.showToast(msg: 'Conexión inestable');
       } else if (error.message == 'ERROR_TOO_MANY_REQUESTS') {
         Fluttertoast.showToast(msg: 'Demasiados intentos. Intente luego');
       } else
         (Fluttertoast.showToast(msg: 'Error indefinido'));
+      Navigator.of(context).pop();
     }
-    print(user.uid);
   }
 
 }

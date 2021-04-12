@@ -37,8 +37,7 @@ class psico_aceptado extends StatelessWidget{
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: Firestore.instance.collection('PSICOLOGOS').document(user.aceptado).snapshots(),
-        builder: (BuildContext context,
-            AsyncSnapshot<DocumentSnapshot> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text('Error:  ${snapshot.error}');
           }
