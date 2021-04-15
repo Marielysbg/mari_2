@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tesis_brainstate/Widget/card_image.dart';
 import 'package:tesis_brainstate/User/ui/screens/screen_respira.dart';
 import 'package:tesis_brainstate/User/ui/screens/NotesScreenPsicologo.dart';
-import 'package:tesis_brainstate/User/ui/screens/screen_metas.dart';
+import 'package:tesis_brainstate/User/ui/screens/screen_Chat_User.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:tesis_brainstate/User/ui/screens/soli_psico.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
@@ -53,7 +53,7 @@ class patient_option_card extends StatelessWidget{
                     text: 'Chat',
                     onTap: (){
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => screenMetas(user)
+                          builder: (context) => screen_Chat_User(user)
                       ));
                     },
                   ),
@@ -70,7 +70,7 @@ class patient_option_card extends StatelessWidget{
                   text: 'Métricas',
                   onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => screenMetas(user)
+                        builder: (context) => screen_Chat_User(user)
                     ));
                   },
                 ),
