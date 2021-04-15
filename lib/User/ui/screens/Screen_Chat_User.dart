@@ -25,10 +25,12 @@ class _screen_Chat_UserState extends State<screen_Chat_User> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
+    String name = user.nombreA;
     return Scaffold(
-        appBar: AppBar(backgroundColor: Colors.indigo,title: Text("Chat"),),//appbar
+        appBar: AppBar(backgroundColor: Colors.indigo,title: Text("Chat de  $name"),),//appbar
 
         body: StreamBuilder(stream: Firestore.instance.collection("chat").where("user.uid" ,  isEqualTo: user.idA).snapshots(),
           builder: (context, snapshots) {
