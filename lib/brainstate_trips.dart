@@ -13,11 +13,13 @@ class home_trips extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _home_trips();
+    return _home_trips(this.user);
   }
 }
 
 class _home_trips extends State<home_trips>{
+  User user = new User();
+  _home_trips(this.user);
 
   int indextap = 0;
 
@@ -33,7 +35,7 @@ class _home_trips extends State<home_trips>{
 
     final List widgetsChildren = [
       home_user(),
-      chat_screen(),
+      chat_screen(this.user),
       profile_screen(user: widget.user)
     ];
 

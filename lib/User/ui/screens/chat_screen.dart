@@ -1,22 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
+import 'package:http/http.dart';
 import '../../../models/chatMessageModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tesis_brainstate/User/model/User.dart';
 
 List<ChatMessage> messages=  <ChatMessage>[];
+final Firestore _firestore = Firestore.instance;
 
+class chat_screen extends StatefulWidget {
+  User user = new User();
+  
+  chat_screen(this.user);
+  
+  //final Firestore _firestore = Firestore.instance;
 
-class chat_screen extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _chat_screen();
+    //messages=  null;
+    ///messages.clear();
+    getData();
+    return _chat_screen(this.user, messages);
   }
 
+   getData() async  {
+    var messagesStream = _firestore.collection("chat").where('user.correo',isEqualTo: user.email).orderBy("timestamp", descending: false).snapshots();
+    await for (var messagesSnapshot in messagesStream) {
+    for (var messageDoc in messagesSnapshot.documents) {
+      var message;
+      print(messageDoc["uid"]);
+      if (messageDoc["uid"] != null) {
+        message = ChatMessage(messageContent: messageDoc["messageContent"], messageType: messageDoc["messageType"]);
+      }
+      else {
+        message = ChatMessage(messageContent: messageDoc["messageContent"], messageType: messageDoc["messageType"]);
+      }
+      messages.add(message);
+      }
+    }
+    return Future.delayed(Duration(seconds: 2), () => print('get messages'),);
+  }
 }
 
 
 
+
 class _chat_screen extends State<chat_screen>{
+  User user = new User();
+  List<ChatMessage> _messages=  <ChatMessage>[];
+  _chat_screen(this.user, this._messages);
+  
 
   void response(String text) async {
     AuthGoogle authGoogle = await AuthGoogle( fileJson: "assets/dialog_flow_auth.json").build();
@@ -25,8 +59,10 @@ class _chat_screen extends State<chat_screen>{
   
     setState(() {
       
-      messages.add( ChatMessage(messageContent: response.getListMessage()[0]["text"]["text"][0].toString(), messageType: "receiver"));
-      
+    messages.add( ChatMessage(messageContent: response.getListMessage()[0]["text"]["text"][0].toString(), messageType: "receiver", user: this.user.toJsonPaciente()));
+      _firestore.collection('chat').add({'messageContent': response.getListMessage()[0]["text"]["text"][0].toString(), 'messageType': "receiver", 'user': this.user.toJsonPaciente(),
+        "timestamp" :DateTime.now().millisecondsSinceEpoch,
+      });
     });
   }
 
@@ -34,6 +70,7 @@ class _chat_screen extends State<chat_screen>{
 
   @override
   Widget build(BuildContext context) {
+    messages = this._messages;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -47,7 +84,6 @@ class _chat_screen extends State<chat_screen>{
             Flexible(child:
           ListView.builder( 
             itemCount: messages.length,
-           
             padding: EdgeInsets.only(top: 10,bottom: 10),
             itemBuilder: (context, index){
               return Container(
@@ -97,8 +133,11 @@ class _chat_screen extends State<chat_screen>{
                             print("Mensaje vacio");
                           } else {
                             setState(() {
-                             messages.add( ChatMessage(messageContent: messagecontroller.text, messageType: "sender"));
-                            
+                            messages.add( ChatMessage(messageContent: messagecontroller.text, messageType: "sender", user: this.user.toJsonPaciente()));
+                             _firestore.collection('chat').add({'messageContent': messagecontroller.text, 'messageType': "sender", 'user': this.user.toJsonPaciente(),
+                               "timestamp" :DateTime.now().millisecondsSinceEpoch
+                             });
+
                             });
                            response(messagecontroller.text);
                             messagecontroller.clear();
@@ -118,8 +157,8 @@ class _chat_screen extends State<chat_screen>{
   }
 
 
-  }
 
 
+}
 
-  
+

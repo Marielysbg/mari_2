@@ -69,7 +69,8 @@ createMeta(){
                   });
       },backgroundColor: Colors.indigo,
       child: Icon(Icons.add, color: Colors.white,),),
-      body: StreamBuilder(stream: Firestore.instance.collection("Metas").where("user.correo" ,  isEqualTo: this.user.email).snapshots(),builder: (context, snapshots){
+      body: StreamBuilder(stream: Firestore.instance.collection("Metas").where("user.correo" ,  isEqualTo: this.user.email).snapshots(),
+        builder: (context, snapshots){
         return ListView.builder(shrinkWrap: true,
             itemCount: snapshots.data  != null ? snapshots.data.documents.length : 0,
             itemBuilder: ( context,  index){
