@@ -6,6 +6,8 @@ import 'package:tesis_brainstate/User/ui/screens/screen_Chat_User.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:tesis_brainstate/User/ui/screens/soli_psico.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
+import 'package:tesis_brainstate/User/ui/screens/Screen_graphics_User.dart';
+
 
 class patient_option_card extends StatelessWidget{
 
@@ -70,7 +72,7 @@ class patient_option_card extends StatelessWidget{
                   text: 'Métricas',
                   onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => screen_Chat_User(user)
+                        builder: (context) => screen_graphics_User(user)
                     ));
                   },
                 ),

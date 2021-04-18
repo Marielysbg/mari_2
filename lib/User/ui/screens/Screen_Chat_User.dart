@@ -17,7 +17,6 @@ class _screen_Chat_UserState extends State<screen_Chat_User> {
 
   User user = new User();
   _screen_Chat_UserState(this.user);
-//List metas = List();
   String title="";
   Firestore _firestore = Firestore.instance;
 

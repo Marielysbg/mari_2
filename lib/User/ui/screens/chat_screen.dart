@@ -18,8 +18,6 @@ class chat_screen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    //messages=  null;
-    ///messages.clear();
     getData();
     return _chat_screen(this.user, messages);
   }
