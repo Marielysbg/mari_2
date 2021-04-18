@@ -77,9 +77,10 @@ class perfil_paciente_t extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+
         leading: IconButton(
           icon: Icon(Icons.arrow_back,
-            color: Colors.indigo,
+            color: Colors.white,
             size: 30.0,
           ),
           onPressed: (){
@@ -90,10 +91,10 @@ class perfil_paciente_t extends StatelessWidget{
         toolbarHeight: 70.0,
         title: Text('Paciente',
           style: TextStyle(
-              color: Colors.black
+              color: Colors.white
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.indigo,
         elevation: 5.0,
       ),
       body: StreamBuilder<DocumentSnapshot>(

@@ -39,6 +39,7 @@ class _screen_graphics_UserState extends State<screen_graphics_User> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Metricas de  $name '),
+        backgroundColor: Colors.indigo,
         actions: <Widget>[
           IconButton(icon: Icon(
               FontAwesomeIcons.chartLine), onPressed: () {

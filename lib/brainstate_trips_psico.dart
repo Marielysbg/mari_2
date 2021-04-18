@@ -39,7 +39,7 @@ class _brainstate_trips_psico extends State<brainstate_trips_psico>{
 
     final List widgetsChildren = [
       home_psico(widget.userr, widget.user),
-      edit_psico(),
+      screen_graphics(widget.userr),
       notificaciones_screen(widget.userr, widget.user),
       profile_psico(widget.userr)
     ];
