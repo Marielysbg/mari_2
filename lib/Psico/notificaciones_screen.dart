@@ -40,7 +40,7 @@ class notificaciones_screen extends StatelessWidget{
                   shrinkWrap: true,
                   itemCount: sections != null ? sections.length : 0,
                   itemBuilder: (_, int index) {
-                    return Container(
+                    return sections[index]['verificadoU'] != 'eliminado'? Container(
                       margin: EdgeInsets.only(
                         top: 20.0
                       ),
@@ -103,6 +103,7 @@ class notificaciones_screen extends StatelessWidget{
                                         user.nombreA = sections[index]['nombreU'];
                                         user.correoA = sections[index]['correoU'];
                                         user.fotoA = sections[index]['fotoU'];
+                                        user.verificadoA = sections[index]['vericadoU'];
 
                                         //1. AÑADIR SOLICITUD ACEPTADA A MATRIZ "ACEPTADA" PSICOLOGO
                                         await ref.document(user.uid).updateData({
@@ -110,7 +111,8 @@ class notificaciones_screen extends StatelessWidget{
                                             'aceptadoU': user.idA,
                                             'nombreU': user.nombreA,
                                             'correoU': user.correoA,
-                                            'fotoU': user.fotoA
+                                            'fotoU': user.fotoA,
+                                            'verificadoU': user.verificado
                                           }])
                                         }).then((value) async{
                                           //2. ELIMINAR SOLICITUD DE MATRIZ "SOLICITUD" PSICOLOGO
@@ -119,7 +121,8 @@ class notificaciones_screen extends StatelessWidget{
                                               'solicitudU': user.idA,
                                               'nombreU': user.nombreA,
                                               'correoU': user.correoA,
-                                              'fotoU': user.fotoA
+                                              'fotoU': user.fotoA,
+                                              'verificadoU': user.verificado
                                             }])
                                           });
                                           DocumentReference ref2 = Firestore.instance.collection('PACIENTES').document(user.idA);
@@ -142,6 +145,7 @@ class notificaciones_screen extends StatelessWidget{
                                         user.nombreA = sections[index]['nombreU'];
                                         user.correoA = sections[index]['correoU'];
                                         user.fotoA = sections[index]['fotoU'];
+                                        user.verificadoA = sections[index]['vericadoU'];
 
                                         DocumentReference ref2 = Firestore.instance.collection('PACIENTES').document(user.idA);
                                         //1. VOLVER "NULL" A SOLICITUD DE PACIENTE
@@ -154,7 +158,8 @@ class notificaciones_screen extends StatelessWidget{
                                               'solicitudU': user.idA,
                                               'nombreU': user.nombreA,
                                               'correoU': user.correoA,
-                                              'fotoU': user.fotoA
+                                              'fotoU': user.fotoA,
+                                              'verificadoU': user.verificado
                                             }])
                                           });
                                           Fluttertoast.showToast(msg: 'Solicitud eliminada');
@@ -167,7 +172,7 @@ class notificaciones_screen extends StatelessWidget{
                         ]),
                       ),
                       )
-                    );
+                    ): Container();
                   },
                 );
               } else{

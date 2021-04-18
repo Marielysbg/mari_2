@@ -12,9 +12,7 @@ class getSoli extends StatelessWidget {
   Widget build(BuildContext context) {
     // get the course document using a stream
     Stream<DocumentSnapshot> courseDocStream = Firestore.instance
-        .collection('USUARIOS')
-        .document(user.uid)
-        .snapshots();
+        .collection('USUARIOS').document(user.uid).snapshots();
 
     return StreamBuilder<DocumentSnapshot>(
         stream: courseDocStream,

@@ -15,7 +15,7 @@ class profile_screen extends StatelessWidget{
 
    return ListView(
      children: [
-       headerprofile(user),
+       headerprofile(user, 250.0),
        cardImageListProfile(user: user,)
      ],
    );

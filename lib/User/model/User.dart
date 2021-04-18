@@ -21,11 +21,15 @@ class User with ChangeNotifier{
   String telfA;
   String fecha;
   String Temergencia;
-  bool verificado = false;
+  String verificado;
+  String verificadoA;
   String s = null;
   String cuadroc;
   String dir;
   String des;
+  String titulo;
+  String descripcion;
+  String direccion;
 
   User({
     Key key,
@@ -52,7 +56,11 @@ class User with ChangeNotifier{
     this.s,
     this.cuadroc,
     this.des,
-    this.dir
+    this.dir,
+    this.titulo,
+    this.verificadoA,
+    this.descripcion,
+    this.direccion
   });
 
   Map<String, dynamic> toJsonPaciente() => {
@@ -63,9 +71,10 @@ class User with ChangeNotifier{
     'telf': telf,
     'rol': rol,
     'foto': foto,
-    'Solicitud enviada': s,
-    'aceptado': 'null',
+    'Solicitud enviada': null,
+    'aceptado': null,
     'fecha nacimiento': fecha,
+    'verificado': 'verificado',
     'paciente': idA
   };
 
@@ -77,7 +86,7 @@ class User with ChangeNotifier{
     'telf': telf,
     'rol': rol,
     'foto': foto,
-    'verificado': verificado,
+    'verificado': 'none',
     'fecha nacimiento': fecha
   };
 }

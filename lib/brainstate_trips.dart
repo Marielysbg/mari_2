@@ -34,7 +34,7 @@ class _home_trips extends State<home_trips>{
     // TODO: implement build
 
     final List widgetsChildren = [
-      home_user(),
+      home_user(widget.user),
       chat_screen(this.user),
       profile_screen(user: widget.user)
     ];

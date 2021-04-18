@@ -48,7 +48,7 @@ class home_psico extends StatelessWidget{
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemCount: sections != null ? sections.length : 0,
             itemBuilder: (_, int index) {
-              return Container(
+              return sections[index]['verificadoU'] != 'eliminado'? Container(
                 child: Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     margin: EdgeInsets.all(10),
@@ -59,8 +59,7 @@ class home_psico extends StatelessWidget{
                         children: <Widget>[
                           FadeInImage(
                             // En esta propiedad colocamos la imagen a descargar
-                            image: NetworkImage(
-                              sections[index]['fotoU'],
+                            image: NetworkImage(sections[index]['fotoU'],
                             ),
                             placeholder: AssetImage('assets/img/loading.gif'),
                             fit: BoxFit.cover,
@@ -85,7 +84,7 @@ class home_psico extends StatelessWidget{
                       ),
                     )
                 ),
-              );
+              ):Container();
             }
         )
         );

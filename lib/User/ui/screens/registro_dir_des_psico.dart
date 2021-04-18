@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tesis_brainstate/brainstate_trips_psico.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tesis_brainstate/Psico/update_comprobante.dart';
 
 class registro_dir_des_psico extends StatelessWidget{
 
@@ -245,8 +245,7 @@ class registro_dir_des_psico extends StatelessWidget{
                                 'direccion': user.dir,
                                 'descripcion': user.des
                               });
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => brainstate_trips_psico(userf, user)));
-                              Fluttertoast.showToast(msg: 'Registro exitoso');
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => update_comprobante(userf,user)));
                             });
                           }
                         },
@@ -264,7 +263,6 @@ class registro_dir_des_psico extends StatelessWidget{
                       ),
                     ),
                   ),
-
                 ],
                 crossAxisAlignment: CrossAxisAlignment.start,
               ),

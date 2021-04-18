@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tesis_brainstate/User/ui/screens/Registro.dart';
-import 'package:tesis_brainstate/brainstate_trips_psico.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
@@ -51,11 +49,7 @@ class _dos_registro extends State<dos_registro>{
 
     Future getImage() async{
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-      //var refi = FirebaseStorage().ref().child(image.toString());
-      //var imageString = await refi.getDownloadURL();
-      //print(imageString);
-
-      setState(() {
+        setState(() {
         _image = image;
       });
     }
@@ -75,7 +69,6 @@ class _dos_registro extends State<dos_registro>{
                   "https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg",
                   fit: BoxFit.fill,
                 ),
-
               ),
             ),
           ),
@@ -214,9 +207,10 @@ class _dos_registro extends State<dos_registro>{
             borderRadius: BorderRadius.circular(18.0)
         ),
         onPressed: () async{
-          if(widget.user.foto == '' || widget.user.name == '' || widget.user.telf == ''  || widget.user.fecha == '' ||  widget.user.rol == ''){
+          if(_image == null || widget.user.name == null || widget.user.telf == null  || widget.user.fecha == null ||  widget.user.rol == null){
             Fluttertoast.showToast(msg: 'Debe completar todo el formulario para continuar');
           } else {
+            print(widget.user.foto);
             setState(() {
               buildShowDialog(context);
             });
@@ -305,21 +299,27 @@ class _dos_registro extends State<dos_registro>{
 
     widget.user.uid = userf.uid;
     CollectionReference ref = Firestore.instance.collection('USUARIOS');
+    CollectionReference ver = Firestore.instance.collection('VERIFICACION');
     CollectionReference msj = Firestore.instance.collection('MensajesP');
     CollectionReference pac = Firestore.instance.collection('PACIENTES');
     CollectionReference psi = Firestore.instance.collection('PSICOLOGOS');
+    CollectionReference emo = Firestore.instance.collection('EMOCIONES');
     if (widget.user.rol == "Paciente") {
       await pac.document(widget.user.uid).setData(widget.user.toJsonPaciente());
       await ref.document(widget.user.uid).setData(widget.user.toJsonPaciente()).whenComplete(() =>
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => tres_registro(widget.user, userf))));
     } else if(widget.user.rol == "Psicologo"){
-      await psi.document(widget.user.uid).setData(widget.user.toJsonPaciente());
+      await psi.document(widget.user.uid).setData(widget.user.toJsonPsico());
+      await ver.document(widget.user.uid).setData(widget.user.toJsonPsico());
       await ref.document(widget.user.uid).setData(widget.user.toJsonPsico()).whenComplete(() async {
         //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => brainstate_trips_psico(userf, widget.user)));
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => registro_dir_des_psico(userf, widget.user)));
         await msj.document(widget.user.uid).setData({
           'uid': widget.user.uid,
           'foto': widget.user.foto
+        });
+        await emo.document(widget.user.uid).setData({
+          'uid': widget.user.uid,
         });
       });
 
@@ -331,6 +331,7 @@ class _dos_registro extends State<dos_registro>{
       updateData(context);
     }catch (e){
       print(e);
+      Navigator.pop(context);
       if(e.message == 'The email address is already in use by another account.'){
         Fluttertoast.showToast(msg: 'Correo en uso');
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Registro()));
