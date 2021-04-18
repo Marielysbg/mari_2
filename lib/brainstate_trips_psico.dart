@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tesis_brainstate/Psico/edit_psico.dart';
+import 'package:tesis_brainstate/Psico/screen_graphics.dart';
 import 'package:tesis_brainstate/Psico/home_psico.dart';
 import 'package:tesis_brainstate/Psico/profile_psico.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
