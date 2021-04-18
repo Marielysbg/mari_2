@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: repositorio_musica_home()//Login_Screen()
+      home: Login_Screen()
       // MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
