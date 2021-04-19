@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -66,11 +67,19 @@ class _screen_graphics_state extends State<_screen_graphics> {
     int QTY_Hombre = 0;
     int QTY_SexOtro = 0;
 
+    int QTY_Menor18 = 0;
+    int QTY_Menor35 = 0;
+    int QTY_Menor50 = 0;
+    int QTY_Mayor50 = 0;
+
     if (psicologo != null) {
       for (var userA in psicologo.data['Aceptados']) {
         var cuadro = userA['CuadroC'];
         var sexo = userA['sexoU'];
-
+        int edad = userA['fechaNU'] != null
+            ? getAge(new DateFormat.yMd('en_US').parse(userA['fechaNU']))
+            : -1;
+        print(edad);
         switch (cuadro) {
           case 'ansiedad':
             QTY_ansiedad += 1;
@@ -99,6 +108,15 @@ class _screen_graphics_state extends State<_screen_graphics> {
             QTY_SexOtro += 1;
         }
 
+        if (edad < 18) {
+          QTY_Menor18 += 1;
+        } else if (edad < 35) {
+          QTY_Menor35 += 1;
+        } else if (edad < 50) {
+          QTY_Menor50 += 1;
+        } else {
+          QTY_Mayor50 += 1;
+        }
       }
     }
 
@@ -112,14 +130,16 @@ class _screen_graphics_state extends State<_screen_graphics> {
         'Mujer': QTY_Mujer,
         'Hombre': QTY_Hombre,
         'SexOtro': QTY_SexOtro,
+        'menor18': QTY_Menor18,
+        'menor35': QTY_Menor35,
+        'menor50': QTY_Menor50,
+        'mayor50': QTY_Mayor50,
       }
     };
   }
 
-  /* = Future<Map<String, dynamic>>.delayed(
-    const Duration(seconds: 2),
-        () => 'Data Loaded',
-  );*/
+  final getAge =
+      (DateTime from) => (DateTime.now().difference(from).inDays / 365).floor();
 
   @override
   Widget build(BuildContext context) {
@@ -213,19 +233,20 @@ class _screen_graphics_state extends State<_screen_graphics> {
                   option: '''
                    {
                    title: {
-                        text:'Género'
+                        text:'Agrupado por edades'
                         },
                         xAxis: {
                             type: 'category',
-                            data: ['Mujer', 'Hombre', 'Otro']
+                            data: ['- 18', '- 35', '- 50', '+ 50']
                         },
                         yAxis: {
                             type: 'value'
                         },
                         series: [{
-                            data: [ ${snapshot.data['counters']['Mujer']}, 
-                                    ${snapshot.data['counters']['Hombre']}, 
-                                    ${snapshot.data['counters']['SexOtro']}, 
+                            data: [ ${snapshot.data['counters']['menor18']}, 
+                                    ${snapshot.data['counters']['menor35']}, 
+                                    ${snapshot.data['counters']['menor50']}, 
+                                     ${snapshot.data['counters']['mayor50']}, 
                                   ],
                             type: 'bar',
                             showBackground: true,
