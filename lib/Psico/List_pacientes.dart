@@ -8,7 +8,7 @@ class List_pacientes extends StatelessWidget{
 
   User user = new User();
   List_pacientes(this.user);
-  CollectionReference ref = Firestore.instance.collection('PSICOLOGOS');
+
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +106,7 @@ class List_pacientes extends StatelessWidget{
                                             user.nombreA = sections[index]['nombreU'];
                                             user.correoA = sections[index]['correoU'];
                                             user.fotoA = sections[index]['fotoU'];
+                                            user.verificadoA = sections[index]['verficadoU'];
                                             String name = user.nombreA;
                                             showDialog(
                                                 context: context,
@@ -135,24 +136,26 @@ class List_pacientes extends StatelessWidget{
                                                           user.nombreA = sections[index]['nombreU'];
                                                           user.correoA = sections[index]['correoU'];
                                                           user.fotoA = sections[index]['fotoU'];
+                                                          user.verificadoA = sections[index]['verificadoU'];
 
+                                                          CollectionReference ref = Firestore.instance.collection('PSICOLOGOS');
                                                           DocumentReference ref2 = Firestore.instance.collection('PACIENTES').document(user.idA);
                                                           //1. VOLVER "NULL" A ACEPTADO DE PACIENTE
                                                           await ref2.updateData({
                                                             'Aceptado': null
-                                                          }).then((value) async{
+                                                          });
                                                             //2. ELIMINAR PACIENTE A PSICOLOGO
-                                                            await ref.document(user.uid).updateData({
-                                                              'Aceptados': FieldValue.arrayRemove([{
-                                                                'aceptadoU': user.idA,
-                                                                'nombreU': user.nombreA,
-                                                                'correoU': user.correoA,
-                                                                'fotoU': user.fotoA
-                                                              }])
-                                                            });
+                                                          await ref.document(user.uid).updateData({
+                                                            'Aceptados': FieldValue.arrayRemove([{
+                                                              'aceptadoU': user.idA,
+                                                              'nombreU': user.nombreA,
+                                                              'correoU': user.correoA,
+                                                              'fotoU': user.fotoA,
+                                                              'verificadoU': user.verificadoA
+                                                            }])
+                                                          });
                                                             Fluttertoast.showToast(msg: 'Solicitud eliminada');
                                                             Navigator.pop(context);
-                                                          });
                                                            },
                                                       ),
                                                     ],

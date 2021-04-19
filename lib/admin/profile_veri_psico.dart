@@ -201,6 +201,7 @@ class profile_veri_psico extends StatelessWidget{
                                           Fluttertoast.showToast(msg: 'Psicologo aceptado');
                                           Navigator.pop(context);
                                         });
+                                        Navigator.pop(context);
                                       },
                                     ),
                                   ],
@@ -259,7 +260,10 @@ class profile_veri_psico extends StatelessWidget{
                                         await usu.updateData({
                                           'verificado' : 'rechazado'
                                         });
+                                        Fluttertoast.showToast(msg: 'Solicitud eliminado');
+                                        Navigator.pop(context);
                                       });
+                                      Navigator.pop(context);
                                     },
                                   ),
                                 ],

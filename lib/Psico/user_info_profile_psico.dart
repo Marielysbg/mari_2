@@ -89,6 +89,7 @@ class user_info_profile_psico extends StatelessWidget{
                               ),
                             ),
                           ),
+                          user.rol == 'Paciente' ?
                           Container(
                             margin: EdgeInsets.only(
                                 top: 5.0
@@ -101,7 +102,7 @@ class user_info_profile_psico extends StatelessWidget{
                                   fontSize: 15.0
                               ),
                             ),
-                          ),
+                          ):Container(),
                         ],
                       ),
                     ),

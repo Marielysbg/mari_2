@@ -9,7 +9,7 @@ class notificaciones_screen extends StatelessWidget{
     User user = new User();
     FirebaseUser userf;
     notificaciones_screen(this.user, this.userf);
-    CollectionReference ref = Firestore.instance.collection('PSICOLOGOS');
+
 
     @override
     Widget build(BuildContext context) {
@@ -105,6 +105,8 @@ class notificaciones_screen extends StatelessWidget{
                                         user.fotoA = sections[index]['fotoU'];
                                         user.verificadoA = sections[index]['verificadoU'];
 
+                                        CollectionReference ref = Firestore.instance.collection('PSICOLOGOS');
+
                                         //1. AÑADIR SOLICITUD ACEPTADA A MATRIZ "ACEPTADA" PSICOLOGO
                                         await ref.document(user.uid).updateData({
                                           'Aceptados': FieldValue.arrayUnion([{
@@ -135,6 +137,7 @@ class notificaciones_screen extends StatelessWidget{
                                             'Solicitud enviada': null
                                           });
                                         });
+                                        Fluttertoast.showToast(msg: 'Paciente aceptado');
                                       },
                                     ),
                                     IconButton(
@@ -147,6 +150,13 @@ class notificaciones_screen extends StatelessWidget{
                                         user.fotoA = sections[index]['fotoU'];
                                         user.verificadoA = sections[index]['verificadoU'];
 
+                                        print(user.idA);
+                                        print(user.nombreA);
+                                        print(user.correoA);
+                                        print(user.fotoA);
+                                        print(user.verificadoA);
+
+                                        CollectionReference ref = Firestore.instance.collection('PSICOLOGOS');
                                         DocumentReference ref2 = Firestore.instance.collection('PACIENTES').document(user.idA);
                                         //1. VOLVER "NULL" A SOLICITUD DE PACIENTE
                                         await ref2.updateData({
@@ -155,15 +165,19 @@ class notificaciones_screen extends StatelessWidget{
                                           //2. ELIMINAR SOLICITUD ENTRANTE A PSICOLOGO
                                           await ref.document(user.uid).updateData({
                                             'Solicitudes': FieldValue.arrayRemove([{
-                                              'solicitudU': user.idA,
-                                              'nombreU': user.nombreA,
                                               'correoU': user.correoA,
                                               'fotoU': user.fotoA,
-                                              'verificadoU': user.verificadoA
+                                              'nombreU': user.nombreA,
+                                              'solicitudU': user.idA,
+                                               'verificadoU': user.verificadoA
                                             }])
                                           });
                                           Fluttertoast.showToast(msg: 'Solicitud eliminada');
                                         });
+
+
+
+
                                       },
                                     ),
                                   ],
