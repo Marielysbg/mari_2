@@ -28,10 +28,10 @@ class _screen_graphics_UserState extends State<screen_graphics_User> {
 
   @override
   Widget build(BuildContext context) {
-    String name= this.user.name;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Métricas de $name"),
+        title: Text("Métricas del paciente"),
         backgroundColor: Colors.indigo,
         centerTitle: true,
         automaticallyImplyLeading: false,
