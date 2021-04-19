@@ -89,19 +89,6 @@ class user_info_profile_psico extends StatelessWidget{
                               ),
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(
-                                top: 5.0
-                            ),
-                            child: Text(
-                              ('#' + snapshot.data['cuadroC']),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15.0
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
