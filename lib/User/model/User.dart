@@ -75,7 +75,10 @@ class User with ChangeNotifier{
     'aceptado': null,
     'fecha nacimiento': fecha,
     'verificado': 'verificado',
-    'paciente': idA
+    'paciente': idA,
+    'sexo': sexo,
+    'fecha': fecha,
+    'CuadroC': cuadroc
   };
 
   Map<String, dynamic> toJsonPsico() => {

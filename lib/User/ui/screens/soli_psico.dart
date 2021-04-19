@@ -35,7 +35,7 @@ class soli_psico extends StatelessWidget {
                   String acep = user.aceptado;
                  String soli = user.soli;
                  print(soli);
-                  return acep != null ? psico_aceptado(user) : soli == 'null' ? Scaffold(
+                  return acep != null ? psico_aceptado(user) : soli == null ? Scaffold(
                       appBar: AppBar(
                         toolbarHeight: 70.0,
                         backgroundColor: Colors.indigo,
@@ -75,7 +75,7 @@ class soli_psico extends StatelessWidget {
                                         itemBuilder: (BuildContext context, int index) {
                                           var docs = snapshot.data.documents[index].data;
                                           //final user = docs[index].data();
-                                          return docs['verificado'] == 'verificado' ? Container(
+                                          return Container(
                                               child: GestureDetector(
                                                 //MÉTODO ON TAP
                                                 onTap: () {
@@ -84,7 +84,6 @@ class soli_psico extends StatelessWidget {
                                                   user.correoA = docs['correo'];
                                                   user.fotoA = docs['foto'];
                                                   user.telfA = docs['telf'];
-                                                  user.verificado = docs['verificado'];
                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => profile_info_psico(user)));
                                                 },
                                                 child: Card(
@@ -142,7 +141,7 @@ class soli_psico extends StatelessWidget {
                                                   ),
                                                 ),
                                               )
-                                          ):Container();
+                                          );
                                         }
                                     );
                                   }
@@ -155,7 +154,8 @@ class soli_psico extends StatelessWidget {
                   )) : Scaffold(
                     body: StreamBuilder<DocumentSnapshot>(
                       stream: Firestore.instance.collection('PSICOLOGOS').document(user.soli).snapshots(),
-                      builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DocumentSnapshot> snapshot) {
                         if (snapshot.hasError) {
                           return Text('Error:  ${snapshot.error}');
                         }
@@ -212,7 +212,9 @@ class soli_psico extends StatelessWidget {
                                                         .circular(180.0),
                                                     image: DecorationImage(
                                                         fit: BoxFit.cover,
-                                                        image: NetworkImage(snapshot.data['foto'])
+                                                        image: NetworkImage(
+                                                            snapshot
+                                                                .data['foto'])
                                                     )
                                                 ),
                                               ),
