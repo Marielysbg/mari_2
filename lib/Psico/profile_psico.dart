@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tesis_brainstate/Psico/formulario_resena.dart';
+import 'package:tesis_brainstate/Psico/resena.dart';
 import 'package:tesis_brainstate/User/ui/widgets/header_profile.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -133,6 +135,28 @@ class profile_psico extends StatelessWidget{
 
         ),
       )
+    );
+
+    final b3 = Container(
+      //width: 350.0,
+      //height: 60.0,
+      // margin: EdgeInsets.only(
+      //    top: 30.0
+      // ),
+        child: CircleAvatar(
+          backgroundColor: Color(0xFFC5CAE9),
+          radius: 30.0,
+          child: IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => resena(user)));
+            },
+            // padding: const EdgeInsets.all(0.0),
+            color: Colors.white,
+            icon: Icon(Icons.rate_review,
+              color: Colors.black,
+            ),
+          ),
+        )
     );
 
     final text = Container(
@@ -282,7 +306,7 @@ class profile_psico extends StatelessWidget{
                   child: edit,
                 ),
                 Container(
-                  width: 230.0,
+                  width: 250.0,
                   height: 100.0,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -304,7 +328,8 @@ class profile_psico extends StatelessWidget{
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       b1,
-                      b2
+                      b2,
+                      b3
                     ],
                   ),
                 ),

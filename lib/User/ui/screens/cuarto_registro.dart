@@ -32,9 +32,6 @@ class cuarto_registro extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-
-
-
     // TODO: implement build
     return Scaffold(
       body: SingleChildScrollView(

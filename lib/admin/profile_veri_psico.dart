@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -197,6 +198,8 @@ class profile_veri_psico extends StatelessWidget{
                                           await usu.updateData({
                                             'verificado' : 'verificado'
                                           });
+                                          Fluttertoast.showToast(msg: 'Psicologo aceptado');
+                                          Navigator.pop(context);
                                         });
                                       },
                                     ),

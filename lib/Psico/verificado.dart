@@ -113,7 +113,7 @@ class verificado extends StatelessWidget{
                     top: 5.0
                 ),
                 child: Text(
-                  'El proceso no demorará nada!',
+                  '¡El proceso no demorará nada!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Color(0xFFBDBDBD),

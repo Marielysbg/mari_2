@@ -7,39 +7,58 @@ import 'package:tesis_brainstate/Psico/psico_aceptado.dart';
 
 
 
-class soli_psico extends StatelessWidget {
+class soli_psico extends StatefulWidget {
 
   User user = new User();
   soli_psico(this.user);
   final auth = FirebaseAuth.instance;
 
   @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _soli_psico();
+  }
+}
+
+
+class _soli_psico extends State<soli_psico>{
+
+  TextEditingController search = new TextEditingController();
+  String name = "";
+
+
+  @override
   Widget build(BuildContext context) {
     // TODO: implement build
 
     return Scaffold(
-
         body: StreamBuilder<DocumentSnapshot>(
-            stream: Firestore.instance.collection('PACIENTES').document(user.uid).snapshots(),
+            stream: Firestore.instance.collection('PACIENTES').document(widget.user.uid).snapshots(),
             builder: (BuildContext context,
                 AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (snapshot.hasError) {
                 return Text('Error:  ${snapshot.error}');
               }
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return Text('Cargando...');
-                default:
-                  user.soli = snapshot.data['Solicitud enviada'];
-                  user.aceptado = snapshot.data['Aceptado'];
-                  String acep = user.aceptado;
-                 String soli = user.soli;
+
+                  widget.user.soli = snapshot.data['Solicitud enviada'];
+                  widget.user.aceptado = snapshot.data['Aceptado'];
+                  String acep = widget.user.aceptado;
+                 String soli = widget.user.soli;
                  print(soli);
-                  return acep != null ? psico_aceptado(user) : soli == null ? Scaffold(
+                  return acep != null ? psico_aceptado(widget.user) : soli == null ? Scaffold(
                       appBar: AppBar(
                         toolbarHeight: 70.0,
                         backgroundColor: Colors.indigo,
                         title: TextField(
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                          //controller: search,
+                          onChanged: (val){
+                            setState(() {
+                              name = val;
+                            });
+                          },
                           decoration: InputDecoration(
                               hintText: 'Ingresa el correo de tu psicologo',
                             hintStyle: TextStyle(
@@ -62,8 +81,9 @@ class soli_psico extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            StreamBuilder(
-                                stream: Firestore.instance.collection('PSICOLOGOS').snapshots(),
+                            StreamBuilder<QuerySnapshot>(
+                                stream: (name != "" && name != null) ? Firestore.instance.collection('PSICOLOGOS').where('key', arrayContains: name).snapshots():
+                                Firestore.instance.collection('PSICOLOGOS').snapshots(),
                                 builder: (BuildContext context, AsyncSnapshot<
                                     QuerySnapshot> snapshot) {
                                   if (snapshot.hasData && snapshot.data != null) {
@@ -75,16 +95,17 @@ class soli_psico extends StatelessWidget {
                                         itemBuilder: (BuildContext context, int index) {
                                           var docs = snapshot.data.documents[index].data;
                                           //final user = docs[index].data();
-                                          return Container(
+                                          return docs['verificado'] == 'verificado' ? Container(
                                               child: GestureDetector(
                                                 //MÉTODO ON TAP
                                                 onTap: () {
-                                                  user.idA = docs['uid'];
-                                                  user.nombreA = docs['nombre'];
-                                                  user.correoA = docs['correo'];
-                                                  user.fotoA = docs['foto'];
-                                                  user.telfA = docs['telf'];
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => profile_info_psico(user)));
+                                                  widget.user.idA = docs['uid'];
+                                                  widget.user.nombreA = docs['nombre'];
+                                                  widget.user.correoA = docs['correo'];
+                                                  widget.user.fotoA = docs['foto'];
+                                                  widget.user.telfA = docs['telf'];
+                                                  widget.user.verificado = docs['verificado'];
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => profile_info_psico(widget.user)));
                                                 },
                                                 child: Card(
                                                   shape: RoundedRectangleBorder(
@@ -141,7 +162,7 @@ class soli_psico extends StatelessWidget {
                                                   ),
                                                 ),
                                               )
-                                          );
+                                          ):Container();
                                         }
                                     );
                                   }
@@ -153,9 +174,8 @@ class soli_psico extends StatelessWidget {
                     ),
                   )) : Scaffold(
                     body: StreamBuilder<DocumentSnapshot>(
-                      stream: Firestore.instance.collection('PSICOLOGOS').document(user.soli).snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      stream: Firestore.instance.collection('PSICOLOGOS').document(widget.user.soli).snapshots(),
+                      builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                         if (snapshot.hasError) {
                           return Text('Error:  ${snapshot.error}');
                         }
@@ -170,6 +190,7 @@ class soli_psico extends StatelessWidget {
                                     height: 230.0,
                                     color: Colors.indigo,
                                     child: IconButton(
+                                      onPressed: (){},
                                       icon: Icon(Icons.arrow_back),
                                     ),
                                   ),
@@ -212,9 +233,7 @@ class soli_psico extends StatelessWidget {
                                                         .circular(180.0),
                                                     image: DecorationImage(
                                                         fit: BoxFit.cover,
-                                                        image: NetworkImage(
-                                                            snapshot
-                                                                .data['foto'])
+                                                        image: NetworkImage(snapshot.data['foto'])
                                                     )
                                                 ),
                                               ),
@@ -291,8 +310,9 @@ class soli_psico extends StatelessWidget {
                     ),
                   );
               }
-            }
         )
     );
   }
+
+
 }

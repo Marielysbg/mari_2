@@ -26,7 +26,7 @@ class dos_registro extends StatefulWidget{
 }
 
 class _dos_registro extends State<dos_registro>{
-
+  
   String valueChoose;
   final auth = FirebaseAuth.instance;
   List listItem = [
@@ -43,9 +43,12 @@ class _dos_registro extends State<dos_registro>{
   File _image;
   TextEditingController _TextFechaController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
+
 
     Future getImage() async{
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -285,6 +288,11 @@ class _dos_registro extends State<dos_registro>{
 
   updateData(BuildContext context) async{
 
+    uploadData(String name) async{
+
+
+    }
+
     String link;
     String imageUrl;
     FirebaseUser userf = await auth.currentUser();
@@ -302,13 +310,21 @@ class _dos_registro extends State<dos_registro>{
     CollectionReference ver = Firestore.instance.collection('VERIFICACION');
     CollectionReference msj = Firestore.instance.collection('MensajesP');
     CollectionReference pac = Firestore.instance.collection('PACIENTES');
+    CollectionReference fav = Firestore.instance.collection('FAVORITOS');
     CollectionReference psi = Firestore.instance.collection('PSICOLOGOS');
     CollectionReference emo = Firestore.instance.collection('EMOCIONES');
     if (widget.user.rol == "Paciente") {
       await pac.document(widget.user.uid).setData(widget.user.toJsonPaciente());
+      await emo.document(widget.user.uid).setData({
+        'uid': widget.user.uid,
+      });
+      await fav.document(widget.user.uid).setData({
+        'uid': widget.user.uid,
+      });
       await ref.document(widget.user.uid).setData(widget.user.toJsonPaciente()).whenComplete(() =>
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => tres_registro(widget.user, userf))));
     } else if(widget.user.rol == "Psicologo"){
+
       await psi.document(widget.user.uid).setData(widget.user.toJsonPsico());
       await ver.document(widget.user.uid).setData(widget.user.toJsonPsico());
       await ref.document(widget.user.uid).setData(widget.user.toJsonPsico()).whenComplete(() async {
@@ -318,8 +334,15 @@ class _dos_registro extends State<dos_registro>{
           'uid': widget.user.uid,
           'foto': widget.user.foto
         });
-        await emo.document(widget.user.uid).setData({
-          'uid': widget.user.uid,
+        List<String> splitList = widget.user.email.split(' ');
+        List<String> indexList = [];
+        for(int i = 0; i < splitList.length; i++){
+          for(int j=0; j < splitList[i].length + i; j++){
+            indexList.add(splitList[i].substring(0, j).toLowerCase());
+          }
+        }
+        await psi.document(widget.user.uid).updateData({
+          'key': indexList
         });
       });
 

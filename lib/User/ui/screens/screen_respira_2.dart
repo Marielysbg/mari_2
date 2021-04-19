@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:tesis_brainstate/User/ui/screens/screen_respira_2.dart';
+import 'package:tesis_brainstate/User/ui/widgets/w_respira.dart';
 import 'package:tesis_brainstate/User/ui/widgets/w_yoga.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 
-class screen_respira extends StatelessWidget{
+
+class screen_respira_dos extends StatelessWidget{
 
   User user = new User();
-  screen_respira(this.user);
+  screen_respira_dos(this.user);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('¡Inhala, exhala!'),
+        title: Text('Técnicas de respiración'),
         centerTitle: true,
         toolbarHeight: 70.0,
         backgroundColor: Colors.indigo,
@@ -32,24 +33,13 @@ class screen_respira extends StatelessWidget{
                 Center(
                   child: Container(
                     margin: EdgeInsets.only(
-                        top: 30.0
-                    ),
-                    height: 250.0,
-                    width: 250.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/img/respirar2.gif')
-                        )
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        top: 30.0
+                        top: 30.0,
+                      bottom: 20.0,
+                      left: 20.0,
+                      right: 20.0
                     ),
                     child: Text(
-                      '¿Cómo es posible que respirar sea una herramienta tan poderosa? 🤔',
+                      'Paso a paso de cómo realizar correctamente los ejercicios de respiración',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black,
@@ -62,14 +52,7 @@ class screen_respira extends StatelessWidget{
                 Padding(
                   padding: EdgeInsets.all(20.0),
                   child: Text(
-                    'Todo en la vida tiene solución y los ejercicios de respiración son una herramienta poderosa que además de la calma trae muchos otros beneficios y bienestar a la persona que la practica de forma regular. ¡Así que no es mala idea incluirlo en tu día a día!',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text(
-                    '1. Regula el estrés y la ansiedad',
+                    '1. Respiración con labios fruncidos:',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -83,7 +66,7 @@ class screen_respira extends StatelessWidget{
                       right: 20.0
                   ),
                   child: Text(
-                    'La respiración profunda tiene la capacidad de regular el sistema nervioso parasimpático para estimular un estado de relajación: el corazón entra en calma, como la mente.\n\nEs normal que si tenemos un ataque de pánico nuestra respiración se acelere, la clave es mantener la calma y hacer ejercicios de respiración para relajarnos y reducir estrés y el miedo.',
+                    '- Inspirar lentamente por la nariz. \n\n- Aguantar el aire 2-3 segundos, si se puede. \n\n- Soplar lentamente frunciendo los labios.',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: Color(0xFF757575),
@@ -91,10 +74,23 @@ class screen_respira extends StatelessWidget{
                     ),
                   ),
                 ),
+                Center(
+                  child:  Container(
+                    height: 250.0,
+                    width: 350.0,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                'https://fisiofine.com/wp-content/uploads/2020/04/ejercicios-fisioterapia-respiratoria-labios-fruncidos.png'
+                            )
+                        )
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.all(20.0),
                   child: Text(
-                    '2. Eliminamos toxinas',
+                    '2. Respiración abdominal o diafragmática:',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -108,7 +104,7 @@ class screen_respira extends StatelessWidget{
                       right: 20.0
                   ),
                   child: Text(
-                    'Nuestros cuerpos están diseñados para liberar gran parte de sus toxinas a través de la respiración. Sin embargo, cuando nuestros pulmones están acostumbrados a llevar a cabo respiraciones rápidas, no llegamos a expulsar del todo esos elementos de desecho. Sería muy conveniente que tomáramos conciencia de ello, y que, al menos durante 2 o 3 veces por día, dedicáramos al menos 10 minutos a respirar de forma profunda.',
+                    '- Paciente tumbado boca arriba con piernas flexionadas o tambien lo puede hacer sentado en una silla.\n\n- Colocará las manos en el abdomen para notar como la barriga se infla al coger aire y se desinfla al expulsarlo.\n\n- Tomaremos aire en cantidad máxima que se pueda por la nariz y lo expulsaremos por la boca lentamente con los labios fruncidos.\n\n- Lo debemos hacer 2 o 3 veces al día, unas 15 repeticiones cada vez .',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: Color(0xFF757575),
@@ -116,10 +112,23 @@ class screen_respira extends StatelessWidget{
                     ),
                   ),
                 ),
+                Center(
+                  child:  Container(
+                    height: 250.0,
+                    width: 350.0,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                'https://fisiofine.com/wp-content/uploads/2020/04/ejercicios-fisioterapia-respiratoria-abdominal-o-diafragmatica.png'
+                            )
+                        )
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.all(20.0),
                   child: Text(
-                    '3. Disminuimos la sensación de dolor',
+                    '3. Respiración costal:',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -133,11 +142,24 @@ class screen_respira extends StatelessWidget{
                       right: 20.0
                   ),
                   child: Text(
-                    'Algo que hacemos muchas veces de forma casi inconsciente cuando sentimos dolor es contener la respiración. Prueba a contener la respiración unos segundos y respirar de forma profunda y pausada. De este modo, liberaremos endorfinas, esos analgésicos naturales del cuerpo.',
+                    '- El paciente estará con piernas estiradas o sentado en una silla.\n\n- Ahora pondremos las manos en el tórax que es lo que vamos a notar como se infla al coger aire, y se desinfla a expulsarlo.\n\n- Tomaremos aire en cantidad máxima que se pueda por la nariz y lo expulsaremos por la boca lentamente con los labios fruncidos.\n\n- Lo debemos hacer 2 o 3 veces al día, unas 15 repeticiones cada vez.',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: Color(0xFF757575),
                       fontSize: 17.0,
+                    ),
+                  ),
+                ),
+                Center(
+                  child:  Container(
+                    height: 250.0,
+                    width: 350.0,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                'https://fisiofine.com/wp-content/uploads/2020/04/ejercicios-fisioterapia-respiratoria-respiracion-costal.png'
+                            )
+                        )
                     ),
                   ),
                 ),
@@ -145,11 +167,11 @@ class screen_respira extends StatelessWidget{
                   margin: EdgeInsets.only(
                       left: 20.0,
                       right: 20.0,
-                      bottom: 20.0,
-                      top: 30.0
+                      bottom: 30.0,
+                      top: 10.0
                   ),
                   child: Text(
-                    'Pero, ¿Cómo se realizan los ejercicios de respiración adecuadamente?',
+                    '¡Recuerda repetir estos ejercicios varias veces al día!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
@@ -166,7 +188,7 @@ class screen_respira extends StatelessWidget{
                     width: 300.0,
                     height: 50.0,
                     child: RaisedButton(
-                      child: Text('Ver más información',
+                      child: Text('¡Me interesa!',
                         style: TextStyle(
                             fontSize: 16.0
                         ),
@@ -179,8 +201,7 @@ class screen_respira extends StatelessWidget{
                           side: BorderSide(color: Colors.indigo)
                       ),
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => screen_respira_dos(user)),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => w_respira(user)),);
                       },
                     ),
                   ),
@@ -191,4 +212,5 @@ class screen_respira extends StatelessWidget{
       ),
     );
   }
+
 }

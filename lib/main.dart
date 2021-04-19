@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tesis_brainstate/User/ui/screens/Login_Screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tesis_brainstate/User/ui/screens/repositorio_musica_home.dart';
+
+import 'User/ui/screens/Login_Screen.dart';
+import 'User/ui/screens/screen_escuchaMusica.dart';
 
 void main() {
   runApp(MyApp());

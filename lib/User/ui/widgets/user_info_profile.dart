@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tesis_brainstate/Psico/user_info_profile_psico.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 
 class userInfoProfile extends StatelessWidget{
@@ -52,8 +53,8 @@ class userInfoProfile extends StatelessWidget{
 
     final user_info = Container(
       margin: EdgeInsets.only(
-        left: 25.0,
-        top: 20.0
+          left: 25.0,
+          top: 20.0
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,6 +65,7 @@ class userInfoProfile extends StatelessWidget{
         ],
       ),
     );
+
 
     final photo =   CircleAvatar(
       radius: 65.0,
@@ -82,21 +84,7 @@ class userInfoProfile extends StatelessWidget{
     );
 
     return Container(
-      margin: EdgeInsets.only(
-        top: 70.0,
-        left: 20.0
-      ),
-      child: Row(
-        //mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          photo,
-          user_info
-        ],
-      ),
+      child: user_info_profile_psico(user)
     );
-
   }
-
-
 }

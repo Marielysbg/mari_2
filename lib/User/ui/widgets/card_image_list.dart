@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tesis_brainstate/User/ui/screens/screen_escuchaMusica.dart';
+import 'package:tesis_brainstate/User/ui/screens/screen_relajate.dart';
 import 'package:tesis_brainstate/Widget/card_image.dart';
 import 'package:tesis_brainstate/User/ui/screens/screen_respira.dart';
 import 'package:tesis_brainstate/User/ui/screens/screen_yoga.dart';
+import 'package:tesis_brainstate/User/model/User.dart';
 
 class card_image_list extends StatelessWidget{
+
+  User user = new User();
+  card_image_list(this.user);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -25,7 +32,7 @@ class card_image_list extends StatelessWidget{
                 text: '¡Respira!',
                 onTap: (){
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => screen_respira()
+                      builder: (context) => screen_respira(user)
                   ));
                 },
               ),
@@ -36,7 +43,7 @@ class card_image_list extends StatelessWidget{
                 text: 'Yoga',
                 onTap: (){
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => screen_yoga()
+                      builder: (context) => screen_yoga(user)
                   ));
                 },
               ),
@@ -51,7 +58,7 @@ class card_image_list extends StatelessWidget{
                 text: 'Escucha música',
                 onTap: (){
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => screen_respira()
+                      builder: (context) => screen_escuchaMusica(user)
                   ));
                 },
               ),
@@ -62,7 +69,7 @@ class card_image_list extends StatelessWidget{
                 text: 'Relájate',
                 onTap: (){
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => screen_yoga()
+                      builder: (context) => screen_relajate(user)
                   ));
                 },
               ),

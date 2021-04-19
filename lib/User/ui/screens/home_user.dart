@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tesis_brainstate/User/ui/widgets/musica_clasif.dart';
 import '../widgets/header_home_user.dart';
 import 'package:tesis_brainstate/Widget/emoji_feedback.dart';
 import 'package:tesis_brainstate/User/ui/widgets/card_image_list.dart';
@@ -72,7 +73,9 @@ class home_user extends StatelessWidget{
                       title: 'Música',
                       icon: Icon(Icons.library_music),
                       sub: 'Escucha nuestro repositorio de música',
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => musica_clasif(user)));
+                    },
                   ),
                 ),
                 Container(
@@ -84,7 +87,7 @@ class home_user extends StatelessWidget{
                       icon: Icon(Icons.video_library),
                       sub: 'Relajate con los videos que preparamos para ti',
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => repositorio_videos_home()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => repositorio_videos_home(user)));
                     },
                   ),
                 ),
@@ -92,7 +95,7 @@ class home_user extends StatelessWidget{
             ),
           ),
           text2,
-          card_image_list()
+          card_image_list(user)
         ],
       ),
     );

@@ -63,6 +63,7 @@ class User with ChangeNotifier{
     this.direccion
   });
 
+
   Map<String, dynamic> toJsonPaciente() => {
     'uid': uid,
     'correo': email,

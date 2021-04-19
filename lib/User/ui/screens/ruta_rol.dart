@@ -74,6 +74,7 @@ class ruta_rol extends StatelessWidget{
     userr.uid = snapshot.data['uid'];
 
     if(snapshot.data['rol'] == "Psicologo"){
+      userr.rol = snapshot.data['rol'];
       userr.name = snapshot.data['nombre'];
       userr.email = snapshot.data['correo'];
       userr.telf = snapshot.data['telf'];

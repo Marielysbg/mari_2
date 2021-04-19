@@ -31,6 +31,7 @@ class profile_info_psico extends StatelessWidget{
                     height: 230.0,
                     color: Colors.indigo,
                     child: IconButton(
+                      onPressed: (){},
                       icon: Icon(Icons.arrow_back),
                     ),
                   ),

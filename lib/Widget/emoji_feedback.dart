@@ -104,6 +104,7 @@ class emoji_feedback extends StatelessWidget {
               'Emociones': FieldValue.arrayUnion([{
                 'index': x,
                 'emocion': emocion,
+                'fecha': fecha,
                 'hora': hora
               }])
             }).whenComplete(()async {
@@ -121,12 +122,7 @@ class emoji_feedback extends StatelessWidget {
               });
             });
           } catch (e){
-            Fluttertoast.showToast(msg: 'Subida fallida $e');
-            Navigator.pop(context);
           }
-
-
-
           print(fecha);
           print(hora);
           print(emocion);

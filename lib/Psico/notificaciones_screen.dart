@@ -116,7 +116,7 @@ class notificaciones_screen extends StatelessWidget{
                                             'nombreU': user.nombreA,
                                             'correoU': user.correoA,
                                             'fotoU': user.fotoA,
-                                            'verificadoU': user.verificado,
+                                            'verificadoU': user.verificadoA,
                                             'fechaNU': user.fecha,
                                             'sexoU': user.sexo,
                                             'CuadroC': user.cuadroc
@@ -129,7 +129,7 @@ class notificaciones_screen extends StatelessWidget{
                                               'nombreU': user.nombreA,
                                               'correoU': user.correoA,
                                               'fotoU': user.fotoA,
-                                              'verificadoU': user.verificado,
+                                              'verificadoU': user.verificadoA,
                                               'fechaNU': user.fecha,
                                               'sexoU': user.sexo,
                                               'CuadroC': user.cuadroc
@@ -143,7 +143,7 @@ class notificaciones_screen extends StatelessWidget{
                                           });
                                           //4. ELIMINAR SOLICITUD DE VARIABLE "SOLICITUD" PACIENTE
                                           await ref2.updateData({
-                                            'Solicitud enviada': 'null'
+                                            'Solicitud enviada': null
                                           });
                                         });
                                       },
@@ -158,12 +158,10 @@ class notificaciones_screen extends StatelessWidget{
                                         user.fotoA = sections[index]['fotoU'];
                                         user.verificadoA = sections[index]['verificadoU'];
 
-
-
                                         DocumentReference ref2 = Firestore.instance.collection('PACIENTES').document(user.idA);
                                         //1. VOLVER "NULL" A SOLICITUD DE PACIENTE
                                         await ref2.updateData({
-                                          'Solicitud enviada': 'null'
+                                          'Solicitud enviada': null
                                         }).then((value) async{
                                           //2. ELIMINAR SOLICITUD ENTRANTE A PSICOLOGO
                                           await ref.document(user.uid).updateData({
@@ -172,7 +170,7 @@ class notificaciones_screen extends StatelessWidget{
                                               'nombreU': user.nombreA,
                                               'correoU': user.correoA,
                                               'fotoU': user.fotoA,
-                                              'verificadoU': user.verificado,
+                                              'verificadoU': user.verificadoA,
                                               'fechaNU': user.fecha,
                                               'sexoU': user.sexo,
                                               'CuadroC': user.cuadroc
