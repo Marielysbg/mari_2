@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tesis_brainstate/brainstate_trips.dart';
@@ -7,6 +8,8 @@ import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:tesis_brainstate/admin/home_admin.dart';
 import 'package:tesis_brainstate/Psico/verificado.dart';
 import 'package:tesis_brainstate/User/ui/screens/Login_Screen.dart';
+
+final Firestore _firestore = Firestore.instance;
 
 class ruta_rol extends StatelessWidget{
 
@@ -165,6 +168,13 @@ class ruta_rol extends StatelessWidget{
             )
         );
       }
+      ////paciente
+      DateTime now = new DateTime.now();
+      String fecha = DateFormat('dd-MM-yyyy').format(now);
+      _firestore.collection('Session').add({'userid': this.userr.uid,
+      "fecha" : fecha,});
+
+
       return home_trips(userr);
     } else if (snapshot.data['rol'] == "admin"){
       return home_admin(userr);

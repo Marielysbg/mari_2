@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
-import 'package:http/http.dart';
 import '../../../models/chatMessageModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
@@ -18,7 +17,7 @@ class chat_screen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    getData();
+    //getData();
     return _chat_screen(this.user, messages);
   }
 
@@ -132,7 +131,7 @@ class _chat_screen extends State<chat_screen>{
                           } else {
                             setState(() {
                             messages.add( ChatMessage(messageContent: messagecontroller.text, messageType: "sender", user: this.user.toJsonPaciente()));
-                             _firestore.collection('chat').add({'messageContent': messagecontroller.text, 'messageType': "sender", 'user': this.user.toJsonPaciente(),
+                             _firestore.collection('chat').add({'messageContent': messagecontroller.text, 'messageType': "sender", 'userid': this.user.toJsonPaciente(),
                                "timestamp" :DateTime.now().millisecondsSinceEpoch
                              });
 

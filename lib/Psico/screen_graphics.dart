@@ -237,7 +237,7 @@ class _screen_graphics_state extends State<_screen_graphics> {
                         },
                         xAxis: {
                             type: 'category',
-                            data: ['- 18', '- 35', '- 50', '+ 50']
+                            data: ['0 - 17', '18 - 35', '36 - 50', '> 50']
                         },
                         yAxis: {
                             type: 'value'
