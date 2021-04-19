@@ -69,90 +69,94 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
   final Firestore _firestore = Firestore.instance;
 
   Future<Map<String, dynamic>> _calculation() async {
-    var psicologo =
-    await _firestore.collection('PSICOLOGOS').document(user.uid).get();
-    int QTY_estres = 0;
-    int QTY_ansiedad = 0;
-    int QTY_panico = 0;
-    int QTY_depresion = 0;
-    int QTY_otras = 0;
+    var session =
+    await _firestore.collection('Session').where("userid" ,  isEqualTo: this.user.idA).getDocuments();
+    int QTY_terrible = 0;
+    int QTY_bad = 0;
+    int QTY_ok = 0;
+    int QTY_good = 0;
+    int QTY_awesome = 0;
+
     int QTY_Mujer = 0;
     int QTY_Hombre = 0;
     int QTY_SexOtro = 0;
 
-    int QTY_Menor18 = 0;
-    int QTY_Menor35 = 0;
-    int QTY_Menor50 = 0;
-    int QTY_Mayor50 = 0;
+    int QTY_Menor3 = 0;
+    int QTY_Menor7 = 0;
+    int QTY_Menor14 = 0;
+    int QTY_Mayor15 = 0;
 
-    if (psicologo != null) {
-      for (var userA in psicologo.data['Aceptados']) {
-        var cuadro = userA['CuadroC'];
-        var sexo = userA['sexoU'];
-        int edad = userA['fechaNU'] != null
-            ? getAge(new DateFormat.yMd('en_US').parse(userA['fechaNU']))
+    if (session != null) {
+
+      for (var userA in session.documents) {
+        int qty_days = userA['fecha'] != null
+            ? getDays(new DateFormat('dd-MM-yyyy').parse(userA.data['fecha']))
             : -1;
-        print(edad);
-        switch (cuadro) {
-          case 'ansiedad':
-            QTY_ansiedad += 1;
-            break;
-          case 'depresion':
-            QTY_depresion += 1;
-            break;
-          case 'panico':
-            QTY_panico += 1;
-            break;
-          case 'estres':
-            QTY_estres += 1;
-            break;
-          default:
-            QTY_otras += 1;
-        }
 
-        switch (sexo) {
-          case 'Mujer':
-            QTY_Mujer += 1;
-            break;
-          case 'Hombre':
-            QTY_Hombre += 1;
-            break;
-          default:
-            QTY_SexOtro += 1;
-        }
-
-        if (edad < 18) {
-          QTY_Menor18 += 1;
-        } else if (edad < 35) {
-          QTY_Menor35 += 1;
-        } else if (edad < 50) {
-          QTY_Menor50 += 1;
+        if (qty_days < 3) {
+          QTY_Menor3 += 1;
+        } else if (qty_days < 7) {
+          QTY_Menor7 += 1;
+        } else if (qty_days < 14) {
+          QTY_Menor14 += 1;
         } else {
-          QTY_Mayor50 += 1;
+          QTY_Mayor15 += 1;
+        }
+      }
+    }
+
+    var emociones =
+    await _firestore.collection('EMOCIONES').document(this.user.idA).get();
+
+    if (emociones != null) {
+
+      for (var userA in emociones.data['Emociones']) {
+        var emocion = userA['emocion'];
+        int days = userA['fecha'] != null
+            ? getDays(new DateFormat('dd-MM-yyyy').parse(userA['fecha']))
+            : -1;
+
+        if (days<7) {
+          switch (emocion) {
+            case 'terrible':
+              QTY_terrible += 1;
+              break;
+            case 'bad':
+              QTY_bad += 1;
+              break;
+            case 'ok':
+              QTY_ok += 1;
+              break;
+            case 'good':
+              QTY_good += 1;
+              break;
+            default:
+              QTY_awesome += 1;
+          }
         }
       }
     }
 
     return {
       'counters': {
-        'ansiedad': QTY_ansiedad,
-        'panico': QTY_panico,
-        'estres': QTY_estres,
-        'depresion': QTY_depresion,
-        'otros': QTY_otras,
+        'terrible': QTY_terrible,
+        'bad': QTY_bad,
+        'ok': QTY_ok,
+        'good': QTY_good,
+        'awesome': QTY_awesome,
         'Mujer': QTY_Mujer,
         'Hombre': QTY_Hombre,
         'SexOtro': QTY_SexOtro,
-        'menor18': QTY_Menor18,
-        'menor35': QTY_Menor35,
-        'menor50': QTY_Menor50,
-        'mayor50': QTY_Mayor50,
+        'menor3': QTY_Menor3,
+        'menor7': QTY_Menor7,
+        'menor14': QTY_Menor14,
+        'mayor15': QTY_Mayor15,
       }
     };
   }
 
-  final getAge =
-      (DateTime from) => (DateTime.now().difference(from).inDays / 365).floor();
+  final getDays =
+      (DateTime from) => (DateTime.now().difference(from).inDays ).floor();
 
   @override
   Widget build(BuildContext context) {
@@ -183,20 +187,22 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
                   option: '''
                    {
                    title: {
-                        text:'Cuadro Clinico'
+                        text:'Emociones de la ultima semana'
                         },
                         xAxis: {
                             type: 'category',
-                            data: ['Ansiedad', 'Depresión', 'Pánico', 'Estrés']
+                            data: ['Terrible', 'Bad', 'Ok', 'Good', 'Awesome'],
+                            axisLabel: { interval: 0, rotate: 40 },
                         },
                         yAxis: {
                             type: 'value'
                         },
                         series: [{
-                            data: [ ${snapshot.data['counters']['ansiedad']}, 
-                                    ${snapshot.data['counters']['depresion']}, 
-                                    ${snapshot.data['counters']['panico']}, 
-                                    ${snapshot.data['counters']['estres']}, 
+                            data: [ ${snapshot.data['counters']['terrible']}, 
+                                    ${snapshot.data['counters']['bad']}, 
+                                    ${snapshot.data['counters']['ok']}, 
+                                    ${snapshot.data['counters']['good']}, 
+                                    ${snapshot.data['counters']['awesome']}, 
                                   ],
                             type: 'bar',
                             showBackground: true,
@@ -246,22 +252,24 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
                   option: '''
                    {
                    title: {
-                        text:'Agrupado por edades'
+                        text:'Fecuencia de uso por rango de dias'
                         },
                         xAxis: {
                             type: 'category',
-                            data: ['0 - 17', '18 - 35', '36 - 50', '> 50']
+                            data: [ '> 15', '8 - 14', '4 - 7','0 - 3']
                         },
                         yAxis: {
                             type: 'value'
                         },
                         series: [{
-                            data: [ ${snapshot.data['counters']['menor18']}, 
-                                    ${snapshot.data['counters']['menor35']}, 
-                                    ${snapshot.data['counters']['menor50']}, 
-                                     ${snapshot.data['counters']['mayor50']}, 
+                            data: [ ${snapshot.data['counters']['mayor15']}, 
+                             ${snapshot.data['counters']['menor14']}, 
+                               ${snapshot.data['counters']['menor7']}, 
+                             ${snapshot.data['counters']['menor3']}, 
+                               
                                   ],
-                            type: 'bar',
+                            type: 'line',
+                            smooth: true,
                             showBackground: true,
                             backgroundStyle: {
                                 color: 'rgba(180, 180, 180, 0.2)'

@@ -172,7 +172,10 @@ class ruta_rol extends StatelessWidget{
       DateTime now = new DateTime.now();
       String fecha = DateFormat('dd-MM-yyyy').format(now);
       _firestore.collection('Session').add({'userid': this.userr.uid,
-      "fecha" : fecha,});
+      });
+
+
+
 
 
       return home_trips(userr);

@@ -204,23 +204,21 @@ class _screen_graphics_state extends State<_screen_graphics> {
                    title: {
                         text:'Género'
                         },
-                        xAxis: {
-                            type: 'category',
-                            data: ['Mujer', 'Hombre', 'Otro']
-                        },
-                        yAxis: {
-                            type: 'value'
-                        },
+                         legend: {
+        data: ['Mujer', 'Hombre', 'Otros'],
+        bottom: 10
+    },
                         series: [{
-                            data: [ ${snapshot.data['counters']['Mujer']}, 
-                                    ${snapshot.data['counters']['Hombre']}, 
-                                    ${snapshot.data['counters']['SexOtro']}, 
+                            data: [{value: ${snapshot.data['counters']['Mujer']}, name: 'Mujer'}, 
+                                    {value:${snapshot.data['counters']['Hombre']}, name: 'Hombre'}, 
+                                    {value:${snapshot.data['counters']['SexOtro']}, name: 'Otros'}, 
                                   ],
-                            type: 'bar',
+                            type: 'pie',
                             showBackground: true,
-                            backgroundStyle: {
-                                color: 'rgba(180, 180, 180, 0.2)'
-                            }
+                            label: {
+                show: false,
+                position: 'center'
+            },
                         }]
                     }
                 ''',
@@ -248,7 +246,7 @@ class _screen_graphics_state extends State<_screen_graphics> {
                                     ${snapshot.data['counters']['menor50']}, 
                                      ${snapshot.data['counters']['mayor50']}, 
                                   ],
-                            type: 'bar',
+                            type: 'line',
                             showBackground: true,
                             backgroundStyle: {
                                 color: 'rgba(180, 180, 180, 0.2)'

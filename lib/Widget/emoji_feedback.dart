@@ -35,6 +35,8 @@ class emoji_feedback extends StatelessWidget {
         child: EmojiFeedback(
             onChange: (index) {
           x = index;
+
+
         }
         ),
       ),
