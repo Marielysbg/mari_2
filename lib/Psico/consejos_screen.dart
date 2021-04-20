@@ -110,7 +110,7 @@ class consejos_screen extends StatelessWidget{
                                    ),
                                  ),
                                )
-                   ), 
+                              ),
                            )
                                ),
                                IconButton(

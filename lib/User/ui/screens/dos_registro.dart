@@ -288,11 +288,6 @@ class _dos_registro extends State<dos_registro>{
 
   updateData(BuildContext context) async{
 
-    uploadData(String name) async{
-
-
-    }
-
     String link;
     String imageUrl;
     FirebaseUser userf = await auth.currentUser();
@@ -304,7 +299,6 @@ class _dos_registro extends State<dos_registro>{
     imageUrl = await firebaseStorageRef.getDownloadURL();
     widget.user.foto = imageUrl;
     widget.user.fecha = _TextFechaController.text;
-
     widget.user.uid = userf.uid;
     CollectionReference ref = Firestore.instance.collection('USUARIOS');
     CollectionReference ver = Firestore.instance.collection('VERIFICACION');
@@ -345,7 +339,6 @@ class _dos_registro extends State<dos_registro>{
           'key': indexList
         });
       });
-
     }
   }
   handleError(BuildContext context, String correo, String contra) async{

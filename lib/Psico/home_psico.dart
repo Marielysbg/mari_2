@@ -64,7 +64,7 @@ class home_psico extends StatelessWidget{
                             placeholder: AssetImage('assets/img/loading.gif'),
                             fit: BoxFit.cover,
                             // En esta propiedad colocamos el alto de nuestra imagen
-                           height: 120.0,
+                           height: 100.0,
                            // width: 300.0,
                           ),
                           Container(
@@ -73,10 +73,12 @@ class home_psico extends StatelessWidget{
                               children: [
                                 Text(
                                   sections[index]['nombreU'],
+                                  maxLines: null,
                                 ),
-                                Text(
-                                  sections[index]['correoU'],
-                                )
+                                 Text(
+                                   sections[index]['correoU'],
+                                   maxLines: null,
+                                 ),
                               ],
                             )
                           )
