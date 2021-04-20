@@ -76,15 +76,15 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
     int QTY_ok = 0;
     int QTY_good = 0;
     int QTY_awesome = 0;
-
-    int QTY_Mujer = 0;
-    int QTY_Hombre = 0;
-    int QTY_SexOtro = 0;
-
     int QTY_Menor3 = 0;
     int QTY_Menor7 = 0;
     int QTY_Menor14 = 0;
     int QTY_Mayor15 = 0;
+
+    int QTY_Ataque_Menor3 = 0;
+    int QTY_Ataque_Menor7 = 0;
+    int QTY_Ataque_Menor14 = 0;
+    int QTY_Ataque_Mayor15 = 0;
 
     if (session != null) {
 
@@ -104,6 +104,26 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
         }
       }
     }
+    var ataque = await _firestore.collection('Ataque').where("userid" ,  isEqualTo: this.user.idA).getDocuments();
+
+    if (ataque != null) {
+
+      for (var userA in ataque.documents) {
+        int Aqty_days = userA['fecha'] != null
+            ? getDays(new DateFormat('dd-MM-yyyy').parse(userA.data['fecha']))
+            : -1;
+
+        if (Aqty_days < 3) {
+          QTY_Ataque_Menor3 += 1;
+        } else if (Aqty_days < 7) {
+          QTY_Ataque_Menor7 += 1;
+        } else if (Aqty_days < 14) {
+          QTY_Ataque_Menor14 += 1;
+        } else {
+          QTY_Ataque_Mayor15 += 1;
+        }
+      }
+    }
 
     var emociones =
     await _firestore.collection('EMOCIONES').document(this.user.idA).get();
@@ -112,11 +132,11 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
 
       for (var userA in emociones.data['Emociones']) {
         var emocion = userA['emocion'];
-        int days = userA['fecha'] != null
+        int Edays = userA['fecha'] != null
             ? getDays(new DateFormat('dd-MM-yyyy').parse(userA['fecha']))
             : -1;
 
-        if (days<7) {
+        if (Edays<7) {
           switch (emocion) {
             case 'terrible':
               QTY_terrible += 1;
@@ -144,13 +164,14 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
         'ok': QTY_ok,
         'good': QTY_good,
         'awesome': QTY_awesome,
-        'Mujer': QTY_Mujer,
-        'Hombre': QTY_Hombre,
-        'SexOtro': QTY_SexOtro,
         'menor3': QTY_Menor3,
         'menor7': QTY_Menor7,
         'menor14': QTY_Menor14,
         'mayor15': QTY_Mayor15,
+        'Ataque_menor3': QTY_Ataque_Menor3,
+        'Ataque_menor7': QTY_Ataque_Menor7,
+        'Ataque_menor14': QTY_Ataque_Menor14,
+        'Ataque_mayor15': QTY_Ataque_Mayor15,
       }
     };
   }
@@ -221,21 +242,24 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
                   option: '''
                    {
                    title: {
-                        text:'Género'
+                        text:'Fecuencia de ataques por rango de dias'
                         },
                         xAxis: {
                             type: 'category',
-                            data: ['Mujer', 'Hombre', 'Otro']
+                            data: [ '> 15', '8 - 14', '4 - 7','0 - 3']
                         },
                         yAxis: {
                             type: 'value'
                         },
                         series: [{
-                            data: [ ${snapshot.data['counters']['Mujer']}, 
-                                    ${snapshot.data['counters']['Hombre']}, 
-                                    ${snapshot.data['counters']['SexOtro']}, 
+                            data: [ ${snapshot.data['counters']['Ataque_mayor15']}, 
+                             ${snapshot.data['counters']['Ataque_menor14']}, 
+                               ${snapshot.data['counters']['Ataque_menor7']}, 
+                             ${snapshot.data['counters']['Ataque_menor3']}, 
+                               
                                   ],
-                            type: 'bar',
+                            type: 'line',
+                            smooth: true,
                             showBackground: true,
                             backgroundStyle: {
                                 color: 'rgba(180, 180, 180, 0.2)'

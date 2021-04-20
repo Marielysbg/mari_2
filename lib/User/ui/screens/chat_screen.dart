@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import '../../../models/chatMessageModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -55,11 +56,25 @@ class _chat_screen extends State<chat_screen>{
         AIResponse response = await dialogflow.detectIntent(text);
   
     setState(() {
-      
-    messages.add( ChatMessage(messageContent: response.getListMessage()[0]["text"]["text"][0].toString(), messageType: "receiver", user: this.user.toJsonPaciente()));
-      _firestore.collection('chat').add({'messageContent': response.getListMessage()[0]["text"]["text"][0].toString(), 'messageType': "receiver", 'user': this.user.toJsonPaciente(),
-        "timestamp" :DateTime.now().millisecondsSinceEpoch,
+      String respuesta= response.getListMessage()[0]["text"]["text"][0].toString();
+     if (respuesta == 'Emergencia') {
+       DateTime now = new DateTime.now();
+       String fecha = DateFormat('dd-MM-yyyy').format(now);
+       _firestore.collection('Ataque').add({'userid': this.user.uid,"fecha" : fecha,});
+       respuesta= 'Quiero que sepas que todo va a estar bien, cuentame de una experiencia que te haga sonreir';
+     }
+
+      messages.add(ChatMessage(
+          messageContent:respuesta,
+          messageType: "receiver",
+          user: this.user.toJsonPaciente()));
+      _firestore.collection('chat').add({
+        'messageContent': respuesta,
+        'messageType': "receiver",
+        'user': this.user.toJsonPaciente(),
+        "timestamp": DateTime.now().millisecondsSinceEpoch,
       });
+
     });
   }
 
@@ -131,7 +146,7 @@ class _chat_screen extends State<chat_screen>{
                           } else {
                             setState(() {
                             messages.add( ChatMessage(messageContent: messagecontroller.text, messageType: "sender", user: this.user.toJsonPaciente()));
-                             _firestore.collection('chat').add({'messageContent': messagecontroller.text, 'messageType': "sender", 'userid': this.user.toJsonPaciente(),
+                             _firestore.collection('chat').add({'messageContent': messagecontroller.text, 'messageType': "sender", 'user': this.user.toJsonPaciente(),
                                "timestamp" :DateTime.now().millisecondsSinceEpoch
                              });
 

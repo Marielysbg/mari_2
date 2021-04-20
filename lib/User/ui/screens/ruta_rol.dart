@@ -168,15 +168,11 @@ class ruta_rol extends StatelessWidget{
             )
         );
       }
-      ////paciente
+      // Historico del inicio de sesion de un paciente
       DateTime now = new DateTime.now();
       String fecha = DateFormat('dd-MM-yyyy').format(now);
       _firestore.collection('Session').add({'userid': this.userr.uid,
-      });
-
-
-
-
+      "fecha" : fecha,});
 
       return home_trips(userr);
     } else if (snapshot.data['rol'] == "admin"){
