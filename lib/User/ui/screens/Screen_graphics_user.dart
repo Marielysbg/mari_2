@@ -212,7 +212,7 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
                         },
                         xAxis: {
                             type: 'category',
-                            data: ['Terrible', 'Bad', 'Ok', 'Good', 'Awesome'],
+                            data: ['Terrible', 'Mal', 'Bien', 'Muy bien', 'Excelente'],
                             axisLabel: { interval: 0, rotate: 40 },
                         },
                         yAxis: {
