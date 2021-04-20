@@ -10,7 +10,7 @@ final Firestore _firestore = Firestore.instance;
 
 class chat_screen extends StatefulWidget {
   User user = new User();
-  
+
   chat_screen(this.user);
   
   //final Firestore _firestore = Firestore.instance;
@@ -18,11 +18,13 @@ class chat_screen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
+    messages.clear();
     //getData();
     return _chat_screen(this.user, messages);
   }
 
    getData() async  {
+
     var messagesStream = _firestore.collection("chat").where('user.correo',isEqualTo: user.email).orderBy("timestamp", descending: false).snapshots();
     await for (var messagesSnapshot in messagesStream) {
     for (var messageDoc in messagesSnapshot.documents) {
