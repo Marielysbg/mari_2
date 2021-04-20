@@ -63,7 +63,7 @@ class _chat_screen extends State<chat_screen>{
        DateTime now = new DateTime.now();
        String fecha = DateFormat('dd-MM-yyyy').format(now);
        _firestore.collection('Ataque').add({'userid': this.user.uid,"fecha" : fecha,});
-       respuesta= 'Quiero que sepas que todo va a estar bien, cuentame de una experiencia que te haga sonreir';
+       respuesta= 'Ante todo tu vales mucho, y todo en esta vida tiene un proposito , a pesar de no estar en tu mejor momento, juntos podemos salir de esta situación';
      }
 
       messages.add(ChatMessage(
