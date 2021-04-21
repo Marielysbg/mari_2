@@ -88,14 +88,17 @@ class ruta_rol extends StatelessWidget{
       return verificado(user, userr);
       //return brainstate_trips_psico(user, userr);
     } else if (snapshot.data['rol'] == "Paciente"){
+      userr.rol = snapshot.data['rol'];
       userr.name = snapshot.data['nombre'];
       userr.email = snapshot.data['correo'];
       userr.telf = snapshot.data['telf'];
-      userr.Temergencia = snapshot.data['nro emergencia'];
+      userr.Temergencia = snapshot.data['telfE'];
       userr.foto = snapshot.data['foto'];
       userr.soli = snapshot.data['Solicitud enviada'];
       userr.aceptado = snapshot.data['Aceptado'];
       userr.verificado = snapshot.data['verificado'];
+      userr.cuadroc = snapshot.data['CuadroC'];
+      userr.sexo = snapshot.data['sexo'];
       String a = snapshot.data['verificado'];
       if (userr.verificado == 'eliminado'){
         return Container(
@@ -172,9 +175,9 @@ class ruta_rol extends StatelessWidget{
       // Historico del inicio de sesion de un paciente
       DateTime now = new DateTime.now();
       String fecha = DateFormat('dd-MM-yyyy').format(now);
-      _firestore.collection('Session').add({'userid': this.userr.uid,
+      _firestore.collection('Session').add({
+        'userid': this.userr.uid,
       "fecha" : fecha,});
-
       return home_trips(userr);
     } else if (snapshot.data['rol'] == "admin"){
       return home_admin(userr);

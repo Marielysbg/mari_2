@@ -107,6 +107,10 @@ class List_pacientes extends StatelessWidget{
                                             user.correoA = sections[index]['correoU'];
                                             user.fotoA = sections[index]['fotoU'];
                                             user.verificadoA = sections[index]['verficadoU'];
+                                            user.fecha = sections[index]['fechaNU'];
+                                            user.sexo = sections[index]['sexoU'];
+                                            user.cuadroc = sections[index]['cuadroC'];
+
                                             String name = user.nombreA;
                                             showDialog(
                                                 context: context,
@@ -137,6 +141,9 @@ class List_pacientes extends StatelessWidget{
                                                           user.correoA = sections[index]['correoU'];
                                                           user.fotoA = sections[index]['fotoU'];
                                                           user.verificadoA = sections[index]['verificadoU'];
+                                                          user.cuadroc = sections[index]['cuadroC'];
+                                                          user.sexo = sections[index]['sexoU'];
+                                                          user.fecha = sections[index]['fechaNU'];
 
                                                           CollectionReference ref = Firestore.instance.collection('PSICOLOGOS');
                                                           DocumentReference ref2 = Firestore.instance.collection('PACIENTES').document(user.idA);
@@ -151,7 +158,10 @@ class List_pacientes extends StatelessWidget{
                                                               'nombreU': user.nombreA,
                                                               'correoU': user.correoA,
                                                               'fotoU': user.fotoA,
-                                                              'verificadoU': user.verificadoA
+                                                              'verificadoU': user.verificadoA,
+                                                              'fechaNU': user.fecha,
+                                                              'sexoU': user.sexo,
+                                                              'cuadroC': user.cuadroc
                                                             }])
                                                           });
                                                             Fluttertoast.showToast(msg: 'Solicitud eliminada');

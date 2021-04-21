@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:tesis_brainstate/User/model/User.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -87,6 +88,7 @@ class notificaciones_screen extends StatelessWidget{
                                       ],
                                     )
                                 ),
+                                Spacer(),
                                 Container(
                                   margin: EdgeInsets.only(
                                     left: 70.0
@@ -104,10 +106,9 @@ class notificaciones_screen extends StatelessWidget{
                                         user.correoA = sections[index]['correoU'];
                                         user.fotoA = sections[index]['fotoU'];
                                         user.verificadoA = sections[index]['verificadoU'];
-                                        user.cuadroc = sections[index]['cuadroc'];
+                                        user.cuadroc = sections[index]['cuadroC'];
                                         user.sexo = sections[index]['sexoU'];
                                         user.fecha = sections[index]['fechaNU'];
-
 
                                         CollectionReference ref = Firestore.instance.collection('PSICOLOGOS');
 
@@ -121,7 +122,7 @@ class notificaciones_screen extends StatelessWidget{
                                             'verificadoU': user.verificadoA,
                                             'fechaNU': user.fecha,
                                             'sexoU': user.sexo,
-                                            'CuadroC': user.cuadroc
+                                            'cuadroC': user.cuadroc
                                           }])
                                         }).then((value) async{
                                           //2. ELIMINAR SOLICITUD DE MATRIZ "SOLICITUD" PSICOLOGO
@@ -134,7 +135,7 @@ class notificaciones_screen extends StatelessWidget{
                                               'verificadoU': user.verificadoA,
                                               'fechaNU': user.fecha,
                                               'sexoU': user.sexo,
-                                              'CuadroC': user.cuadroc
+                                              'cuadroC': user.cuadroc
 
                                             }])
                                           });
@@ -160,12 +161,9 @@ class notificaciones_screen extends StatelessWidget{
                                         user.correoA = sections[index]['correoU'];
                                         user.fotoA = sections[index]['fotoU'];
                                         user.verificadoA = sections[index]['verificadoU'];
-
-                                        print(user.idA);
-                                        print(user.nombreA);
-                                        print(user.correoA);
-                                        print(user.fotoA);
-                                        print(user.verificadoA);
+                                        user.fecha = sections[index]['fechaNU'];
+                                        user.sexo = sections[index]['sexoU'];
+                                        user.cuadroc = sections[index]['cuadroC'];
 
                                         CollectionReference ref = Firestore.instance.collection('PSICOLOGOS');
                                         DocumentReference ref2 = Firestore.instance.collection('PACIENTES').document(user.idA);
@@ -183,7 +181,7 @@ class notificaciones_screen extends StatelessWidget{
                                               'verificadoU': user.verificadoA,
                                               'fechaNU': user.fecha,
                                               'sexoU': user.sexo,
-                                              'CuadroC': user.cuadroc,
+                                              'cuadroC': user.cuadroc,
                                             }])
                                           });
                                           Fluttertoast.showToast(msg: 'Solicitud eliminada');
