@@ -72,7 +72,7 @@ class _screen_graphics_state extends State<_screen_graphics> {
     int QTY_Menor50 = 0;
     int QTY_Mayor50 = 0;
 
-    if (psicologo != null) {
+    if (psicologo != null && psicologo.data['Aceptados'] != null ) {
       for (var userA in psicologo.data['Aceptados']) {
         var cuadro = userA['CuadroC'];
         var sexo = userA['sexoU'];

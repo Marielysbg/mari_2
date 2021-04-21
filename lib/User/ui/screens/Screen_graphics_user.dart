@@ -128,7 +128,7 @@ class _screen_graphics_state extends State<_screen_graphics_data> {
     var emociones =
     await _firestore.collection('EMOCIONES').document(this.user.idA).get();
 
-    if (emociones != null) {
+    if (emociones != null && emociones.data['Emociones'] != null) {
 
       for (var userA in emociones.data['Emociones']) {
         var emocion = userA['emocion'];
