@@ -163,6 +163,7 @@ class List_pacientes extends StatelessWidget{
                                                               'sexoU': user.sexo,
                                                               'cuadroC': user.cuadroc
                                                             }])
+
                                                           });
                                                             Fluttertoast.showToast(msg: 'Solicitud eliminada');
                                                             Navigator.pop(context);
