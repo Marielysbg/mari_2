@@ -78,6 +78,7 @@ class User with ChangeNotifier{
     'verificado': 'verificado',
     'paciente': idA,
     'sexo': sexo,
+    'telfE': Temergencia,
     'fecha': fecha,
     'CuadroC': cuadroc
   };
@@ -88,9 +89,11 @@ class User with ChangeNotifier{
     'nombre': name,
     'sexo': sexo,
     'telf': telf,
+    'telfE': Temergencia,
     'rol': rol,
     'foto': foto,
     'verificado': 'none',
     'fecha nacimiento': fecha
+
   };
 }

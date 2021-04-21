@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
@@ -41,6 +44,11 @@ class chat_screen extends StatefulWidget {
     }
     return Future.delayed(Duration(seconds: 2), () => print('get messages'),);
   }
+
+
+
+
+
 }
 
 
@@ -50,7 +58,24 @@ class _chat_screen extends State<chat_screen>{
   User user = new User();
   List<ChatMessage> _messages=  <ChatMessage>[];
   _chat_screen(this.user, this._messages);
-  
+
+
+  Future<http.Response> enviarCorreo({String subject, String text}) async{//String subject, String text
+    return http.post(
+      Uri.https('brainsimplemailer.herokuapp.com', 'mail'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "from":"brain.state",
+        "to":"mariaalejandraduarte.ujap@gmail.com",
+        "subject": subject,
+        "text":text
+      }),
+    );
+  }
+
+
 
   void response(String text) async {
     AuthGoogle authGoogle = await AuthGoogle( fileJson: "assets/dialog_flow_auth.json").build();
@@ -64,6 +89,14 @@ class _chat_screen extends State<chat_screen>{
        String fecha = DateFormat('dd-MM-yyyy').format(now);
        _firestore.collection('Ataque').add({'userid': this.user.uid,"fecha" : fecha,});
        respuesta= 'Ante todo tu vales mucho, y todo en esta vida tiene un proposito , a pesar de no estar en tu mejor momento, juntos podemos salir de esta situación';
+       String nombre= user.name;
+       String tlf= user.telf;
+       String tlfE= user.Temergencia;
+       String Date = DateFormat('dd-MM-yyyy').format(DateTime.now());
+       String hora = DateFormat('h:mma').format(DateTime.now());
+
+       enviarCorreo(subject: 'Emergencia paciente: $nombre $Date - $hora'  ,text: 'Buenas el paciente: $nombre presenta una emergencia el dia $Date - $hora. '
+           'Contacto del paciente # Telefono paciente: $tlf  # Telefono familiar: $tlfE ');
      }
 
       messages.add(ChatMessage(
