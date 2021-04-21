@@ -68,7 +68,7 @@ class _chat_screen extends State<chat_screen>{
       },
       body: jsonEncode(<String, String>{
         "from":"brain.state",
-        "to":"mariaalejandraduarte.ujap@gmail.com",
+        "to":"brain.state2021@gmail.com",
         "subject": subject,
         "text":text
       }),
