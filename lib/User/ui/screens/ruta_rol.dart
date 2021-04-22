@@ -96,6 +96,9 @@ class ruta_rol extends StatelessWidget{
       userr.soli = snapshot.data['Solicitud enviada'];
       userr.aceptado = snapshot.data['Aceptado'];
       userr.verificado = snapshot.data['verificado'];
+      userr.sexo = snapshot.data['sexo'];
+      userr.cuadroc = snapshot.data['cuadroC'];
+      userr.fecha = snapshot.data['fecha'];
       String a = snapshot.data['verificado'];
       if (userr.verificado == 'eliminado'){
         return Container(
