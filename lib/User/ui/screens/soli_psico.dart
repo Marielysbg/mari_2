@@ -108,6 +108,8 @@ class _soli_psico extends State<soli_psico>{
                                                   widget.user.fotoA = docs['foto'];
                                                   widget.user.telfA = docs['telf'];
                                                   widget.user.verificadoA = docs['verificado'];
+                                                  widget.user.cuadroc = docs['cuadroC'];
+                                                  widget.user.fecha = docs['fecha'];
 
                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => profile_info_psico(widget.user)));
                                                 },

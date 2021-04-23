@@ -95,7 +95,7 @@ class user_info_profile_psico extends StatelessWidget{
                                 top: 5.0
                             ),
                             child: Text(
-                              ('#' + snapshot.data['CuadroC']),
+                              ('#' + snapshot.data['cuadroC']),
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
