@@ -56,8 +56,8 @@ class _screen_graphics_state extends State<_screen_graphics> {
   final Firestore _firestore = Firestore.instance;
 
   Future<Map<String, dynamic>> _calculation() async {
-    var psicologo =
-        await _firestore.collection('PSICOLOGOS').document(user.uid).get();
+    var paciente =
+        await _firestore.collection('PACIENTES').where("Aceptado" ,  isEqualTo: this.user.uid).getDocuments();
     int QTY_estres = 0;
     int QTY_ansiedad = 0;
     int QTY_panico = 0;
@@ -72,12 +72,12 @@ class _screen_graphics_state extends State<_screen_graphics> {
     int QTY_Menor50 = 0;
     int QTY_Mayor50 = 0;
 
-    if (psicologo != null && psicologo.data['Aceptados'] != null ) {
-      for (var userA in psicologo.data['Aceptados']) {
-        var cuadro = userA['CuadroC'];
-        var sexo = userA['sexoU'];
-        int edad = userA['fechaNU'] != null
-            ? getAge(new DateFormat.yMd('en_US').parse(userA['fechaNU']))
+    if (paciente != null ) {
+      for (var userA in paciente.documents) {
+        var cuadro = userA['cuadroC'];
+        var sexo = userA['sexo'];
+        int edad = userA['fecha'] != null
+            ? getAge(new DateFormat.yMd('en_US').parse(userA['fecha']))
             : -1;
         print(edad);
         switch (cuadro) {
