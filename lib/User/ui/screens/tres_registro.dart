@@ -99,10 +99,10 @@ class tres_registro extends StatelessWidget{
            CollectionReference ref = Firestore.instance.collection('USUARIOS');
            CollectionReference pac = Firestore.instance.collection('PACIENTES');
            await pac.document(user.uid).updateData({
-             'nro emergencia': user.Temergencia
+             'telfE': user.Temergencia
            }).then((value) async{
              await ref.document(user.uid).updateData({
-               'nro emergencia': user.Temergencia
+               'telfE': user.Temergencia
              });
              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => cuarto_registro(userf, user)));
            });

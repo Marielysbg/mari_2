@@ -143,7 +143,7 @@ class profile_info_psico extends StatelessWidget{
                                       'verificadoU': user.verificado,
                                       'fechaNU': user.fecha,
                                       'sexoU': user.sexo,
-                                      'cuadroc': user.cuadroc
+                                      'cuadroC': user.cuadroc
                                     }])
                                   });
                                   Navigator.pop(context);

@@ -42,6 +42,9 @@ class _soli_psico extends State<soli_psico>{
 
                   widget.user.soli = snapshot.data['Solicitud enviada'];
                   widget.user.aceptado = snapshot.data['Aceptado'];
+                  widget.user.verificado = snapshot.data['verificado'];
+                  widget.user.fecha = snapshot.data['fecha'];
+                  widget.user.sexo = snapshot.data['sexo'];
                   String acep = widget.user.aceptado;
                  String soli = widget.user.soli;
                  print(soli);
@@ -105,6 +108,8 @@ class _soli_psico extends State<soli_psico>{
                                                   widget.user.fotoA = docs['foto'];
                                                   widget.user.telfA = docs['telf'];
                                                   widget.user.verificadoA = docs['verificado'];
+                                                  widget.user.cuadroc = docs['cuadroC'];
+                                                  widget.user.fecha = docs['fecha'];
 
                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => profile_info_psico(widget.user)));
                                                 },

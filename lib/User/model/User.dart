@@ -77,7 +77,6 @@ class User with ChangeNotifier{
     'fecha nacimiento': fecha,
     'verificado': 'verificado',
     'paciente': idA,
-    'sexo': sexo,
     'telfE': Temergencia,
     'fecha': fecha,
     'CuadroC': cuadroc
