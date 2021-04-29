@@ -74,7 +74,7 @@ class _screen_graphics_state extends State<_screen_graphics> {
 
     if (paciente != null ) {
       for (var userA in paciente.documents) {
-        var cuadro = userA['cuadroC'];
+        var cuadro = userA['CuadroC'];
         var sexo = userA['sexo'];
         int edad = userA['fecha'] != null
             ? getAge(new DateFormat.yMd('en_US').parse(userA['fecha']))
