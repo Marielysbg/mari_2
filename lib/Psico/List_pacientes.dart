@@ -109,7 +109,7 @@ class List_pacientes extends StatelessWidget{
                                             user.verificadoA = sections[index]['verficadoU'];
                                             user.fecha = sections[index]['fechaNU'];
                                             user.sexo = sections[index]['sexoU'];
-                                            user.cuadroc = sections[index]['cuadroC'];
+                                            user.cuadroc = sections[index]['CuadroC'];
 
                                             String name = user.nombreA;
                                             showDialog(
@@ -141,7 +141,7 @@ class List_pacientes extends StatelessWidget{
                                                           user.correoA = sections[index]['correoU'];
                                                           user.fotoA = sections[index]['fotoU'];
                                                           user.verificadoA = sections[index]['verificadoU'];
-                                                          user.cuadroc = sections[index]['cuadroC'];
+                                                          user.cuadroc = sections[index]['CuadroC'];
                                                           user.sexo = sections[index]['sexoU'];
                                                           user.fecha = sections[index]['fechaNU'];
 
@@ -161,7 +161,7 @@ class List_pacientes extends StatelessWidget{
                                                               'verificadoU': user.verificadoA,
                                                               'fechaNU': user.fecha,
                                                               'sexoU': user.sexo,
-                                                              'cuadroC': user.cuadroc
+                                                              'CuadroC': user.cuadroc
                                                             }])
 
                                                           });

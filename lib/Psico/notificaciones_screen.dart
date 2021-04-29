@@ -106,7 +106,7 @@ class notificaciones_screen extends StatelessWidget{
                                         user.correoA = sections[index]['correoU'];
                                         user.fotoA = sections[index]['fotoU'];
                                         user.verificadoA = sections[index]['verificadoU'];
-                                        user.cuadroc = sections[index]['cuadroC'];
+                                        user.cuadroc = sections[index]['CuadroC'];
                                         user.sexo = sections[index]['sexoU'];
                                         user.fecha = sections[index]['fechaNU'];
 
@@ -122,7 +122,7 @@ class notificaciones_screen extends StatelessWidget{
                                             'verificadoU': user.verificadoA,
                                             'fechaNU': user.fecha,
                                             'sexoU': user.sexo,
-                                            'cuadroC': user.cuadroc
+                                            'CuadroC': user.cuadroc
                                           }])
                                         }).then((value) async{
                                           //2. ELIMINAR SOLICITUD DE MATRIZ "SOLICITUD" PSICOLOGO
@@ -135,7 +135,7 @@ class notificaciones_screen extends StatelessWidget{
                                               'verificadoU': user.verificadoA,
                                               'fechaNU': user.fecha,
                                               'sexoU': user.sexo,
-                                              'cuadroC': user.cuadroc
+                                              'CuadroC': user.cuadroc
 
                                             }])
                                           });

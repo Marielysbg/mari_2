@@ -230,10 +230,10 @@ class edit_cc extends StatelessWidget{
                           CollectionReference ref = Firestore.instance.collection('USUARIOS');
                           CollectionReference pac = Firestore.instance.collection('PACIENTES');
                           await pac.document(user.uid).updateData({
-                            'cuadroC': user.cuadroc
+                            'CuadroC': user.cuadroc
                           }).then((value) async{
                             await ref.document(user.uid).updateData({
-                              'cuadroC': user.cuadroc
+                              'CuadroC': user.cuadroc
                             });
                             Fluttertoast.showToast(msg: 'Cambio exitoso');
                             Navigator.pop(context);
